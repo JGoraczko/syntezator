@@ -19,6 +19,8 @@ Na implementowany syntezator składają się 4 procesy:
 - Proces C przesyła na wyjście audio karty dźwiękowej.
 - Proces D jest nadzorcą i obsługuje interfejs użytkownika.
 
+![schemat systemu](schemat_systemu.png)
+
 Przesyłane bloki próbek będą miały znaczniki czasowe. Odpowiednie czasy przetwarzania
 będą zapisywane do plików co pewien okres przez oddzielne wątki procesów B i C.
 
