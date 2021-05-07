@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1620386789 source:/home/lukasz/Pulpit/test/main.cpp
+	<SFML/Audio.hpp>
+	<thread>
+	<chrono>
+	<iostream>
+	"ProcessC.hpp"
+
+1620300206 /home/lukasz/Pulpit/test/processC.hpp
+	<SFML/Audio.hpp>
+
+1620385764 /home/lukasz/Pulpit/test/ProcessC.hpp
+	<SFML/Audio.hpp>
+	<deque>
+	<mutex>
+
+1620385881 source:/home/lukasz/Pulpit/test/ProcessC.cpp
+	"ProcessC.hpp"
+	<iostream>
+
