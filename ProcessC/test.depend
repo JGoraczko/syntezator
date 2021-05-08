@@ -18,7 +18,7 @@
 	"ProcessC.hpp"
 	<iostream>
 
-1620503698 source:/home/lukasz/Pulpit/ProcessC/main.cpp
+1620508139 source:/home/lukasz/Pulpit/ProcessC/main.cpp
 	<SFML/Audio.hpp>
 	<thread>
 	<chrono>
