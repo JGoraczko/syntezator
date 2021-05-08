@@ -1,5 +1,4 @@
 #include "ProcessC.hpp"
-#include <iostream>
 
 void MusicPlayer::load(const sf::SoundBuffer& buffer)
 {
@@ -11,7 +10,7 @@ void MusicPlayer::load(const sf::SoundBuffer& buffer)
 void MusicPlayer::addSamples(const sf::SoundBuffer& buffer)
 {
     std::lock_guard<std::mutex> guard(sem);
-    if(this->getStatus() == Stopped)
+    if(this->getStatus() == Stopped || currentSample == samples.size())
     {
         currentSample = 0;
         samples.assign(buffer.getSamples(), buffer.getSamples() + buffer.getSampleCount());

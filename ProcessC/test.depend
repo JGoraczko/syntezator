@@ -18,19 +18,20 @@
 	"ProcessC.hpp"
 	<iostream>
 
-1620495854 source:/home/lukasz/Pulpit/ProcessC/main.cpp
+1620503698 source:/home/lukasz/Pulpit/ProcessC/main.cpp
 	<SFML/Audio.hpp>
 	<thread>
 	<chrono>
 	<iostream>
+	<cmath>
 	"ProcessC.hpp"
+	<iostream>
 
 1620495822 /home/lukasz/Pulpit/ProcessC/ProcessC.hpp
 	<SFML/Audio.hpp>
 	<vector>
 	<mutex>
 
-1620495843 source:/home/lukasz/Pulpit/ProcessC/ProcessC.cpp
+1620503527 source:/home/lukasz/Pulpit/ProcessC/ProcessC.cpp
 	"ProcessC.hpp"
-	<iostream>
 
