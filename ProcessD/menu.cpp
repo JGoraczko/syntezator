@@ -2,6 +2,10 @@
 #include <limits>
 #include <cstdarg>
 #include <iostream>
+#include <sys/types.h>
+#include <unistd.h>
+#include <csignal>
+#include <sys/resource.h>
 
 using namespace std;
 
@@ -133,7 +137,10 @@ void Menu::playMidiFile()
     if( pid == 0){
         char *argv[] = {"processC", name, NULL};
         execve("./processC", argv, NULL);
-    } else tab[0] = pid; */
+    } else tab[0] = pid;
+    //ustalanie priorytetów
+    setpriority(PRIO_PROCESS, 0, 19);
+    */
     cout << "Playing file " << file_name << "\nEnter any key to quit ...\n";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
