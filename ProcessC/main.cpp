@@ -93,10 +93,10 @@ void PlayFromFile(char* filename){
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(510));
             buffer.loadFromSamples(&paczka[0], paczka.size(), 1, SAMPLE_RATE);
-            player.load(buffer);
+            player.addSamples(buffer);
             std::cout << " ---------- " <<buffer.getSampleCount() << std::endl;
             if(player.getStatus() == 0){
-                player.play();
+                //player.play(); - NIE TRZEBA!!!!
             }
 
 

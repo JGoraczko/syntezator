@@ -1,15 +1,14 @@
 #include "ProcessC.hpp"
 
-void MusicPlayer::load(const sf::SoundBuffer& buffer)
-{
-    samples.assign(buffer.getSamples(), buffer.getSamples() + buffer.getSampleCount());
-    currentSample = 0;
-    initialize(buffer.getChannelCount(), buffer.getSampleRate());
-}
-
 void MusicPlayer::addSamples(const sf::SoundBuffer& buffer)
 {
     std::lock_guard<std::mutex> guard(sem);
+    if (first_time)
+    {
+        initialize(buffer.getChannelCount(), buffer.getSampleRate());
+        first_time = false;
+    }
+
     if(this->getStatus() == Stopped || currentSample == samples.size())
     {
         currentSample = 0;

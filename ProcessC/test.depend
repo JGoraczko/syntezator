@@ -221,11 +221,11 @@
 	"ProcessC.hpp"
 	<iostream>
 
-1620571401 /home/lukasz/Pulpit/syntezator/ProcessC/ProcessC.hpp
+1620584201 /home/lukasz/Pulpit/syntezator/ProcessC/ProcessC.hpp
 	<SFML/Audio.hpp>
 	<vector>
 	<mutex>
 
-1620571401 source:/home/lukasz/Pulpit/syntezator/ProcessC/ProcessC.cpp
+1620584270 source:/home/lukasz/Pulpit/syntezator/ProcessC/ProcessC.cpp
 	"ProcessC.hpp"
 

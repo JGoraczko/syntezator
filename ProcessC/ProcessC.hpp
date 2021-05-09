@@ -9,13 +9,13 @@ class MusicPlayer : public sf::SoundStream
 {
 public:
 
-    void load(const sf::SoundBuffer& buffer);
     void addSamples(const sf::SoundBuffer& buffer);
 
 private:
 
     const int SAMPLES_TO_STREAM = 30000;
     std::vector<sf::Int16> samples;
+    bool first_time = true;
     std::size_t currentSample;
     std::mutex sem;
 
