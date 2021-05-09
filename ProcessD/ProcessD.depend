@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1620574291 source:/home/lukasz/Pulpit/ProcessD/main.cpp
+	"menu.h"
+
+1620578701 source:/home/lukasz/Pulpit/ProcessD/menu.cpp
+	"menu.h"
+	<limits>
+	<cstdarg>
+	<iostream>
+
+1620578019 /home/lukasz/Pulpit/ProcessD/menu.h
+	<vector>
+

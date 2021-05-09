@@ -48,6 +48,7 @@ short TriangleWave (double time, double freq, const int SAMPLE_RATE)
 {
     return 2*abs(SawWave(time, freq, SAMPLE_RATE))-1;
 }
+
 void PlayFromFile(char* filename){
     const int SAMPLE_RATE = 44100;
     smf::MidiFile midiFile;
