@@ -53,48 +53,49 @@ void PlayFromFile(char* filename){
     smf::MidiFile midiFile;
     sf::SoundBuffer buffer;
     midiFile.read(filename);
+    midiFile.joinTracks();
     midiFile.doTimeAnalysis();
-    midiFile.linkNotePairs();
     midiFile.deltaTicks();
 
     bool isPlaying = false;
 
 
 
-    midiFile.joinTracks();
+
+
+
     midiFile.linkNotePairs();
     MusicPlayer player;
-    for(int i = 0; i < midiFile.getEventCount(0); i++ ){
-        smf::MidiEvent midiEvent = midiFile.getEvent(0, i);
-        double duration;
-        /*
+    for(int i = 0; i < midiFile[0].size(); i++ ){
+        /*double duration;
+
         if(midiEvent.isLinked()){
             duration = midiEvent.getDurationInSeconds();
         }
+        /*
         if(midiEvent.isNoteOff()){
             std::cout << "note off" << std::endl;
         } else {
             std::cout << "not note" << std::endl;
         }*/
-        duration = midiFile.getEvent(0, i + 1).tick/4.0;
-        if(midiEvent.isNoteOn() && duration){
-
+        if(midiFile[0][i].isNoteOn()){
+            double duration = midiFile[0][i].getDurationInSeconds();
 
             std::cout << duration << " ---------- ";
-            std::cout << midiEvent.getKeyNumber() << " ---------- ";
-            std::cout << 27.5 * pow(2, (midiEvent.getKeyNumber()/12.0)) << std::endl;
+            std::cout << midiFile[0][i].getKeyNumber() << " ---------- ";
+            std::cout << 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0));
 
             std::vector<sf::Int16> paczka;
             for (int s = 0; s < SAMPLE_RATE*duration; ++s){
-                paczka.push_back(SineWave(s, 27.5 * pow(2, (midiEvent.getKeyNumber()/12.0)), SAMPLE_RATE));
+                paczka.push_back(SineWave(s, 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0)), SAMPLE_RATE));
 
             }
+            std::this_thread::sleep_for(std::chrono::milliseconds(510));
             buffer.loadFromSamples(&paczka[0], paczka.size(), 1, SAMPLE_RATE);
             player.load(buffer);
-            if(!isPlaying){
+            std::cout << " ---------- " <<buffer.getSampleCount() << std::endl;
+            if(player.getStatus() == 0){
                 player.play();
-                isPlaying = true;
-
             }
 
 
@@ -108,7 +109,7 @@ void PlayFromFile(char* filename){
 
 int main()
 {
-    PlayFromFile("bach.mid");
+    PlayFromFile("Beethoven.mid");
     /*
     const int SAMPLE_RATE = 44100;
     sf::SoundBuffer buffer, buffer2;

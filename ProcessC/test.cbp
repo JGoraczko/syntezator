@@ -14,6 +14,7 @@
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add directory="../midifilelibrary/include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -38,9 +39,24 @@
 		<Linker>
 			<Add option="-lsfml-audio" />
 		</Linker>
+		<Unit filename="../midifilelibrary/include/Binasc.h" />
+		<Unit filename="../midifilelibrary/include/MidiEvent.h" />
+		<Unit filename="../midifilelibrary/include/MidiEventList.h" />
+		<Unit filename="../midifilelibrary/include/MidiFile.h" />
+		<Unit filename="../midifilelibrary/include/MidiMessage.h" />
+		<Unit filename="../midifilelibrary/include/Options.h" />
+		<Unit filename="../midifilelibrary/src/Binasc.cpp" />
+		<Unit filename="../midifilelibrary/src/MidiEvent.cpp" />
+		<Unit filename="../midifilelibrary/src/MidiEventList.cpp" />
+		<Unit filename="../midifilelibrary/src/MidiFile.cpp" />
+		<Unit filename="../midifilelibrary/src/MidiMessage.cpp" />
+		<Unit filename="../midifilelibrary/src/Options.cpp" />
 		<Unit filename="ProcessC.cpp" />
 		<Unit filename="ProcessC.hpp" />
 		<Unit filename="main.cpp" />
-		<Extensions />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
