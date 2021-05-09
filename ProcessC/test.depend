@@ -35,3 +35,99 @@
 1620503527 source:/home/lukasz/Pulpit/ProcessC/ProcessC.cpp
 	"ProcessC.hpp"
 
+1620559398 source:/home/jakub/syntezator/ProcessC/main.cpp
+	<SFML/Audio.hpp>
+	<thread>
+	<chrono>
+	<iostream>
+	<cmath>
+	"MidiFile.h"
+	"MidiEvent.h"
+	"MidiMessage.h"
+	"ProcessC.hpp"
+	<iostream>
+
+1620515373 /home/jakub/syntezator/ProcessC/ProcessC.hpp
+	<SFML/Audio.hpp>
+	<vector>
+	<mutex>
+
+1620515373 source:/home/jakub/syntezator/ProcessC/ProcessC.cpp
+	"ProcessC.hpp"
+
+1620516565 source:/home/jakub/syntezator/midifilelibrary/src/Binasc.cpp
+	"Binasc.h"
+	<sstream>
+	<stdlib.h>
+
+1620497140 /home/jakub/syntezator/midifilelibrary/include/Binasc.h
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<stdlib.h>
+
+1620497140 source:/home/jakub/syntezator/midifilelibrary/src/MidiEvent.cpp
+	"MidiEvent.h"
+	<stdlib.h>
+
+1620497140 /home/jakub/syntezator/midifilelibrary/include/MidiEvent.h
+	"MidiMessage.h"
+	<vector>
+
+1620497140 /home/jakub/syntezator/midifilelibrary/include/MidiMessage.h
+	<vector>
+	<string>
+
+1620497140 source:/home/jakub/syntezator/midifilelibrary/src/MidiEventList.cpp
+	"MidiEventList.h"
+	<vector>
+	<algorithm>
+	<iterator>
+	<utility>
+	"stdlib.h"
+
+1620497140 /home/jakub/syntezator/midifilelibrary/include/MidiEventList.h
+	"MidiEvent.h"
+	<vector>
+
+1620497140 source:/home/jakub/syntezator/midifilelibrary/src/MidiFile.cpp
+	"MidiFile.h"
+	"Binasc.h"
+	<string>
+	<vector>
+	<iostream>
+	<iomanip>
+	<fstream>
+	<sstream>
+	<iterator>
+	<algorithm>
+
+1620497140 /home/jakub/syntezator/midifilelibrary/include/MidiFile.h
+	"MidiEventList.h"
+	<vector>
+	<string>
+	<istream>
+	<fstream>
+
+1620497140 source:/home/jakub/syntezator/midifilelibrary/src/MidiMessage.cpp
+	"MidiMessage.h"
+	<vector>
+	<iostream>
+	<iterator>
+
+1620497140 source:/home/jakub/syntezator/midifilelibrary/src/Options.cpp
+	"Options.h"
+	<stdlib.h>
+	<string>
+	<vector>
+	<cctype>
+	<iostream>
+	<algorithm>
+
+1620497140 /home/jakub/syntezator/midifilelibrary/include/Options.h
+	<iostream>
+	<map>
+	<string>
+	<vector>
+

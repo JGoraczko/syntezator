@@ -3,6 +3,9 @@
 #include <chrono>
 #include <iostream>
 #include <cmath>
+#include "MidiFile.h"
+#include "MidiEvent.h"
+#include "MidiMessage.h"
 
 #include "ProcessC.hpp"
 #include <iostream>
@@ -44,16 +47,66 @@ short TriangleWave (double time, double freq, const int SAMPLE_RATE)
 {
     return 2*abs(SawWave(time, freq, SAMPLE_RATE))-1;
 }
+void PlayFromFile(char* filename){
+    const int SAMPLE_RATE = 44100;
+    smf::MidiFile midiFile;
+    sf::SoundBuffer buffer;
+    midiFile.read(filename);
+    midiFile.doTimeAnalysis();
+    midiFile.linkNotePairs();
+    midiFile.deltaTicks();
+    std::vector<sf::Int16> paczka;
+
+
+
+    midiFile.joinTracks();
+    midiFile.linkNotePairs();
+    MusicPlayer player;
+    for(int i = 0; i < midiFile.getEventCount(0); i++ ){
+        smf::MidiEvent midiEvent = midiFile.getEvent(0, i);
+        double duration;
+        /*
+        if(midiEvent.isLinked()){
+            duration = midiEvent.getDurationInSeconds();
+        }
+        if(midiEvent.isNoteOff()){
+            std::cout << "note off" << std::endl;
+        } else {
+            std::cout << "not note" << std::endl;
+        }*/
+        if(midiEvent.isNoteOn()){
+            duration = midiFile.getEvent(0, i + 1).tick/30;
+            /*
+            std::cout << duration << " ---------- ";
+            std::cout << midiEvent.getKeyNumber() << " ---------- ";
+            std::cout << 55 * pow(2, (midiEvent.getKeyNumber()/12.0)) << std::endl;*/
+            for (int s = 0; s < SAMPLE_RATE*duration; ++s){
+                paczka.push_back(SineWave(s, 55 * pow(2, (midiEvent.getKeyNumber()/12.0)), SAMPLE_RATE));
+
+            }
+        buffer.loadFromSamples(&paczka[0], paczka.size(), 1, SAMPLE_RATE);
+
+
+
+
+        }
+    }
+    player.load(buffer);
+    player.play();
+    std::this_thread::sleep_for(std::chrono::seconds(20));
+}
 
 int main()
 {
+    PlayFromFile("bach.mid");
+    /*
     const int SAMPLE_RATE = 44100;
     sf::SoundBuffer buffer, buffer2;
     std::vector<sf::Int16> paczka, paczka2;
     for (int s = 0; s < 44100; ++s)
         paczka.push_back(TriangleWave(s, 440, SAMPLE_RATE));
     for (int s = 0; s < 44100; ++s)
-        paczka2.push_back(SawWave(s, 440, SAMPLE_RATE));
+        paczka2.push_back(SawWave(s, 220, SAMPLE_RATE));
     buffer.loadFromSamples(&paczka[0], paczka.size(), 1, SAMPLE_RATE);
     MusicPlayer player;
     player.load(buffer);
@@ -64,7 +117,7 @@ int main()
     std::this_thread::sleep_for(std::chrono::seconds(6));
     player.addSamples(buffer);
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    /*
+
     if (!buffer.loadFromFile("muza.wav"))
        return -1;
     MusicPlayer player;
