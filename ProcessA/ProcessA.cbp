@@ -2,30 +2,30 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="test" />
+		<Option title="ProcessA" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/test" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/ProcessA" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add directory="../midifilelibrary/include" />
-					<Add directory="../../syntezator" />
+					<Add directory="/home/jakub/syntezator/" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/test" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/ProcessA" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-std=c++11" />
+					<Add directory="../midifilelibrary/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -34,13 +34,21 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-std=c++11" />
-			<Add option="-fexceptions -lsfml-audio" />
+			<Add option="-fexceptions" />
 		</Compiler>
-		<Linker>
-			<Add option="-lsfml-audio" />
-		</Linker>
-		<Unit filename="../datachunk.h" />
+		<Unit filename="../../datachunk.h" />
+		<Unit filename="../../midifilelibrary/include/Binasc.h" />
+		<Unit filename="../../midifilelibrary/include/MidiEvent.h" />
+		<Unit filename="../../midifilelibrary/include/MidiEventList.h" />
+		<Unit filename="../../midifilelibrary/include/MidiFile.h" />
+		<Unit filename="../../midifilelibrary/include/MidiMessage.h" />
+		<Unit filename="../../midifilelibrary/include/Options.h" />
+		<Unit filename="../../midifilelibrary/src/Binasc.cpp" />
+		<Unit filename="../../midifilelibrary/src/MidiEvent.cpp" />
+		<Unit filename="../../midifilelibrary/src/MidiEventList.cpp" />
+		<Unit filename="../../midifilelibrary/src/MidiFile.cpp" />
+		<Unit filename="../../midifilelibrary/src/MidiMessage.cpp" />
+		<Unit filename="../../midifilelibrary/src/Options.cpp" />
 		<Unit filename="../midifilelibrary/include/Binasc.h" />
 		<Unit filename="../midifilelibrary/include/MidiEvent.h" />
 		<Unit filename="../midifilelibrary/include/MidiEventList.h" />
@@ -53,9 +61,7 @@
 		<Unit filename="../midifilelibrary/src/MidiFile.cpp" />
 		<Unit filename="../midifilelibrary/src/MidiMessage.cpp" />
 		<Unit filename="../midifilelibrary/src/Options.cpp" />
-		<Unit filename="ProcessC.cpp" />
-		<Unit filename="ProcessC.hpp" />
-		<Unit filename="main.cpp" />
+		<Unit filename="ProcessA.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

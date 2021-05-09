@@ -35,7 +35,7 @@
 1620503527 source:/home/lukasz/Pulpit/ProcessC/ProcessC.cpp
 	"ProcessC.hpp"
 
-1620567946 source:/home/jakub/syntezator/ProcessC/main.cpp
+1620596837 source:/home/jakub/syntezator/ProcessC/main.cpp
 	<SFML/Audio.hpp>
 	<thread>
 	<chrono>
@@ -46,14 +46,15 @@
 	"MidiEvent.h"
 	"MidiMessage.h"
 	"ProcessC.hpp"
+	"datachunk.h"
 	<iostream>
 
-1620515373 /home/jakub/syntezator/ProcessC/ProcessC.hpp
+1620586447 /home/jakub/syntezator/ProcessC/ProcessC.hpp
 	<SFML/Audio.hpp>
 	<vector>
 	<mutex>
 
-1620515373 source:/home/jakub/syntezator/ProcessC/ProcessC.cpp
+1620586447 source:/home/jakub/syntezator/ProcessC/ProcessC.cpp
 	"ProcessC.hpp"
 
 1620516565 source:/home/jakub/syntezator/midifilelibrary/src/Binasc.cpp
@@ -228,4 +229,7 @@
 
 1620584270 source:/home/lukasz/Pulpit/syntezator/ProcessC/ProcessC.cpp
 	"ProcessC.hpp"
+
+1620596728 /home/jakub/syntezator/datachunk.h
+	<SFML/Audio.hpp>
 
