@@ -3,6 +3,7 @@
 #include <chrono>
 #include <iostream>
 #include <cmath>
+#include <stdbool.h>
 #include "MidiFile.h"
 #include "MidiEvent.h"
 #include "MidiMessage.h"
@@ -55,7 +56,8 @@ void PlayFromFile(char* filename){
     midiFile.doTimeAnalysis();
     midiFile.linkNotePairs();
     midiFile.deltaTicks();
-    std::vector<sf::Int16> paczka;
+
+    bool isPlaying = false;
 
 
 
@@ -74,25 +76,33 @@ void PlayFromFile(char* filename){
         } else {
             std::cout << "not note" << std::endl;
         }*/
-        if(midiEvent.isNoteOn()){
-            duration = midiFile.getEvent(0, i + 1).tick/30;
-            /*
+        duration = midiFile.getEvent(0, i + 1).tick/4.0;
+        if(midiEvent.isNoteOn() && duration){
+
+
             std::cout << duration << " ---------- ";
             std::cout << midiEvent.getKeyNumber() << " ---------- ";
-            std::cout << 55 * pow(2, (midiEvent.getKeyNumber()/12.0)) << std::endl;*/
+            std::cout << 27.5 * pow(2, (midiEvent.getKeyNumber()/12.0)) << std::endl;
+
+            std::vector<sf::Int16> paczka;
             for (int s = 0; s < SAMPLE_RATE*duration; ++s){
-                paczka.push_back(SineWave(s, 55 * pow(2, (midiEvent.getKeyNumber()/12.0)), SAMPLE_RATE));
+                paczka.push_back(SineWave(s, 27.5 * pow(2, (midiEvent.getKeyNumber()/12.0)), SAMPLE_RATE));
 
             }
-        buffer.loadFromSamples(&paczka[0], paczka.size(), 1, SAMPLE_RATE);
+            buffer.loadFromSamples(&paczka[0], paczka.size(), 1, SAMPLE_RATE);
+            player.load(buffer);
+            if(!isPlaying){
+                player.play();
+                isPlaying = true;
 
+            }
 
 
 
         }
     }
-    player.load(buffer);
-    player.play();
+
+
     std::this_thread::sleep_for(std::chrono::seconds(20));
 }
 

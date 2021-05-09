@@ -35,12 +35,13 @@
 1620503527 source:/home/lukasz/Pulpit/ProcessC/ProcessC.cpp
 	"ProcessC.hpp"
 
-1620559398 source:/home/jakub/syntezator/ProcessC/main.cpp
+1620560843 source:/home/jakub/syntezator/ProcessC/main.cpp
 	<SFML/Audio.hpp>
 	<thread>
 	<chrono>
 	<iostream>
 	<cmath>
+	<stdbool.h>
 	"MidiFile.h"
 	"MidiEvent.h"
 	"MidiMessage.h"
