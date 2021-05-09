@@ -208,7 +208,7 @@
 	<string>
 	<vector>
 
-1620572440 source:/home/lukasz/Pulpit/syntezator/ProcessC/main.cpp
+1620584405 source:/home/lukasz/Pulpit/syntezator/ProcessC/main.cpp
 	<SFML/Audio.hpp>
 	<thread>
 	<chrono>

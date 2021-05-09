@@ -121,11 +121,23 @@ void Menu::waveformMenu()
 void Menu::playMidiFile()
 {
     string file_name;
+    //Tworzenie i usuwanie procesów
+    //pid_t tab[3];
     cout << "Enter name of MIDI file:\n";
     cin >> file_name;
-    //uruchamianie procesów z odpowiednimi parametrami
+    /*char name [file_name.size()+1];
+    file_name.copy(name, file_name.size()+1);
+    name[file_name.size()] = '\0';
+    // Create first process
+    pid_t pid = fork();
+    if( pid == 0){
+        char *argv[] = {"processC", name, NULL};
+        execve("./processC", argv, NULL);
+    } else tab[0] = pid; */
     cout << "Playing file " << file_name << "\nEnter any key to quit ...\n";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     //usuwanie odpowiednich procesów
+    //kill(tab[0], SIGABRT);
 }
