@@ -22,18 +22,26 @@ int main()
     mqd_t mq;
     struct mq_attr attr;
     attr.mq_flags = 0;
-    attr.mq_maxmsg = 10;
+    attr.mq_maxmsg = 50;
     attr.mq_msgsize = sizeof(DataChunk);
     attr.mq_curmsgs = 0;
-    mq = mq_open(FIRST_QUEUE_NAME, O_CREAT | O_RDONLY, 0644, &attr);
+
+
+    mq_unlink(FIRST_QUEUE_NAME);
+    mq = mq_open(FIRST_QUEUE_NAME, O_CREAT | O_RDONLY | O_EXCL, 0777, &attr);
+    fprintf(stderr, "%s:%d: ", __func__, __LINE__);
+    perror("Błąd utworzenia kolejki");
 
     do {
         sf::SoundBuffer buffer;
         int bytesRead = mq_receive(mq, (char *) &data, sizeof(DataChunk), NULL);
-        std::cout << bytesRead << "\n";
         if(bytesRead > 0){
+        std::cout << bytesRead << "\n";
             buffer.loadFromSamples(&data.samples[0], SAMPLE_COUNT, 1, SAMPLE_RATE);
             player.addSamples(buffer);
+        } else {
+            fprintf(stderr, "%s:%d: ", __func__, __LINE__);
+            perror("Błąd konsumenta");
         }
 
     } while (1);

@@ -11,3 +11,20 @@
 1620578019 /home/lukasz/Pulpit/ProcessD/menu.h
 	<vector>
 
+1620636855 source:/home/jakub/syntezator/ProcessD/main.cpp
+	"menu.h"
+	<iostream>
+
+1620636855 /home/jakub/syntezator/ProcessD/menu.h
+	<vector>
+
+1620636855 source:/home/jakub/syntezator/ProcessD/menu.cpp
+	"menu.h"
+	<limits>
+	<cstdarg>
+	<iostream>
+	<sys/types.h>
+	<unistd.h>
+	<csignal>
+	<sys/resource.h>
+

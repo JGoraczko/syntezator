@@ -1,29 +1,29 @@
 # depslib dependency file v1.0
-1620602227 source:/home/jakub/syntezator/midifilelibrary/src/Binasc.cpp
+1620636855 source:/home/jakub/syntezator/midifilelibrary/src/Binasc.cpp
 	"Binasc.h"
 	<sstream>
 	<stdlib.h>
 
-1620602227 /home/jakub/syntezator/midifilelibrary/include/Binasc.h
+1620636855 /home/jakub/syntezator/midifilelibrary/include/Binasc.h
 	<iostream>
 	<fstream>
 	<string>
 	<cstdlib>
 	<stdlib.h>
 
-1620602227 source:/home/jakub/syntezator/midifilelibrary/src/MidiEvent.cpp
+1620636855 source:/home/jakub/syntezator/midifilelibrary/src/MidiEvent.cpp
 	"MidiEvent.h"
 	<stdlib.h>
 
-1620602227 /home/jakub/syntezator/midifilelibrary/include/MidiEvent.h
+1620636855 /home/jakub/syntezator/midifilelibrary/include/MidiEvent.h
 	"MidiMessage.h"
 	<vector>
 
-1620602227 /home/jakub/syntezator/midifilelibrary/include/MidiMessage.h
+1620636855 /home/jakub/syntezator/midifilelibrary/include/MidiMessage.h
 	<vector>
 	<string>
 
-1620602227 source:/home/jakub/syntezator/midifilelibrary/src/MidiEventList.cpp
+1620636855 source:/home/jakub/syntezator/midifilelibrary/src/MidiEventList.cpp
 	"MidiEventList.h"
 	<vector>
 	<algorithm>
@@ -31,11 +31,11 @@
 	<utility>
 	"stdlib.h"
 
-1620602227 /home/jakub/syntezator/midifilelibrary/include/MidiEventList.h
+1620636855 /home/jakub/syntezator/midifilelibrary/include/MidiEventList.h
 	"MidiEvent.h"
 	<vector>
 
-1620602227 source:/home/jakub/syntezator/midifilelibrary/src/MidiFile.cpp
+1620636855 source:/home/jakub/syntezator/midifilelibrary/src/MidiFile.cpp
 	"MidiFile.h"
 	"Binasc.h"
 	<string>
@@ -47,20 +47,20 @@
 	<iterator>
 	<algorithm>
 
-1620602227 /home/jakub/syntezator/midifilelibrary/include/MidiFile.h
+1620636855 /home/jakub/syntezator/midifilelibrary/include/MidiFile.h
 	"MidiEventList.h"
 	<vector>
 	<string>
 	<istream>
 	<fstream>
 
-1620602227 source:/home/jakub/syntezator/midifilelibrary/src/MidiMessage.cpp
+1620636855 source:/home/jakub/syntezator/midifilelibrary/src/MidiMessage.cpp
 	"MidiMessage.h"
 	<vector>
 	<iostream>
 	<iterator>
 
-1620602227 source:/home/jakub/syntezator/midifilelibrary/src/Options.cpp
+1620636855 source:/home/jakub/syntezator/midifilelibrary/src/Options.cpp
 	"Options.h"
 	<stdlib.h>
 	<string>
@@ -69,13 +69,13 @@
 	<iostream>
 	<algorithm>
 
-1620602227 /home/jakub/syntezator/midifilelibrary/include/Options.h
+1620636855 /home/jakub/syntezator/midifilelibrary/include/Options.h
 	<iostream>
 	<map>
 	<string>
 	<vector>
 
-1620604155 source:/home/jakub/syntezator/ProcessA/ProcessA.cpp
+1620637762 source:/home/jakub/syntezator/ProcessA/ProcessA.cpp
 	<iostream>
 	<thread>
 	<chrono>
@@ -88,6 +88,6 @@
 	<mqueue.h>
 	<string.h>
 
-1620602227 /home/jakub/syntezator//datachunk.h
+1620639134 /home/jakub/syntezator//datachunk.h
 	<SFML/Audio.hpp>
 
