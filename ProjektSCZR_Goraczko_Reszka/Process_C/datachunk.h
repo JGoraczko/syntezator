@@ -10,7 +10,7 @@ typedef struct DataChunk
 {
 
     sf::Int16 samples[SAMPLE_COUNT];
-    time_t send_time;
+    std::chrono::high_resolution_clock::time_point send_time;
 
 }DataChunk;
 

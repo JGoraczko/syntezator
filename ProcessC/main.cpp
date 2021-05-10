@@ -24,14 +24,14 @@ void addLog(double log)
     if (logs.size() == SAVING_PERIOD) mutex_save.unlock();
 }
 
-void saveLogs()
+void saveLogs(char *file_name)
 {
     while (true)
     {
         mutex_save.lock();
         mutex_logs.lock();
         std::fstream file;
-        file.open("test.txt", std::ios::out);
+        file.open(file_name, std::ios::out);
         if (!file) exit(-1);
         for(int i=0; i<logs.size(); ++i)
             file << logs[i] << std::endl;
@@ -43,14 +43,16 @@ void saveLogs()
 
 int main(int argc, char * argv[])
 {
-    if (argc < 2) return -1;
-    SAVING_PERIOD = std::stoi(argv[1]);
+    if (argc < 3) return -1;
+    SAVING_PERIOD = std::stoi(argv[2]);
+    char * file_name = argv[1];
+
     const int SAMPLE_RATE = 44100;
     DataChunk data;
 
     MusicPlayer player;
     mutex_save.lock();
-    std::thread logSaver (saveLogs);
+    std::thread logSaver (saveLogs, file_name);
     mqd_t mq;
     struct mq_attr attr;
     attr.mq_flags = 0;

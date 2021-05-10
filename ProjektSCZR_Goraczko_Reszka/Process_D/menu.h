@@ -2,6 +2,7 @@
 #define MENU_H_INCLUDED
 
 #include <vector>
+#include <string>
 
 #define A_PRIORITY 0
 #define C_PRIORITY 1
@@ -14,17 +15,19 @@ class Menu
 {
    public:
 
-     void mainMenu (int *arg);  //launches main menu - rest of explanations in "menu.cpp"
+     void mainMenu (char *arg[]);  //launches main menu - rest of explanations in "menu.cpp"
 
    private:
 
-     int parameters[5];
+     char *parameters[5];
      void pressKeyToContinue (void);
      int getInfo (bool &error);
      void getInt (int &choice, bool &error);
      void getOption (int &choice, int options, bool &error);
      void waveformMenu (void);
      void playMidiFile(void);
+     char* intToChar(int numb);
+     char* stringToChar(std::string s);
 };
 
 #endif // MENU_H_INCLUDED

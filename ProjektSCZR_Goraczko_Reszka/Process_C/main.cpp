@@ -24,14 +24,14 @@ void addLog(double log)
     if (logs.size() == SAVING_PERIOD) mutex_save.unlock();
 }
 
-void saveLogs()
+void saveLogs(char *file_name)
 {
     while (true)
     {
         mutex_save.lock();
         mutex_logs.lock();
         std::fstream file;
-        file.open("test.txt", std::ios::out);
+        file.open(file_name, std::ios::out);
         if (!file) exit(-1);
         for(int i=0; i<logs.size(); ++i)
             file << logs[i] << std::endl;
@@ -43,14 +43,16 @@ void saveLogs()
 
 int main(int argc, char * argv[])
 {
-    if (argc < 2) return -1;
-    SAVING_PERIOD = std::stoi(argv[1]);
+    if (argc < 3) return -1;
+    SAVING_PERIOD = std::stoi(argv[2]);
+    char * file_name = argv[1];
+
     const int SAMPLE_RATE = 44100;
     DataChunk data;
 
     MusicPlayer player;
     mutex_save.lock();
-    std::thread logSaver (saveLogs);
+    std::thread logSaver (saveLogs, file_name);
     mqd_t mq;
     struct mq_attr attr;
     attr.mq_flags = 0;
@@ -70,11 +72,10 @@ int main(int argc, char * argv[])
         sf::SoundBuffer buffer;
         int bytesRead = mq_receive(mq, (char *) &data, sizeof(DataChunk), NULL);
         if(bytesRead > 0){
-        std::cout << bytesRead << "\n";
             buffer.loadFromSamples(&data.samples[0], SAMPLE_COUNT, 1, SAMPLE_RATE);
             player.addSamples(buffer);
-            time_t received_time = time(NULL);
-            double transport_time = difftime(received_time, data.send_time);
+            std::chrono::duration<float , std::micro> elapsed = std::chrono::high_resolution_clock::now() - data.send_time;
+            long long transport_time = elapsed.count();
             addLog(transport_time);
         } else {
             fprintf(stderr, "%s:%d: ", __func__, __LINE__);

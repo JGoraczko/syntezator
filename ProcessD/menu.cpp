@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <csignal>
 #include <sys/resource.h>
+#include <ctime>
 
 using namespace std;
 
@@ -42,11 +43,12 @@ void Menu::getOption (int &choice, int options, bool &error)    //gets correct n
     error = true;
 }
 
-void Menu::mainMenu(int *arg)   //launches main menu
+void Menu::mainMenu(char *arg[])   //launches main menu
 {
   for (int i=0; i<4; ++i)
     parameters[i]= arg[i];
-  arg[WAVE_FORM] = SINEW;
+  parameters[WAVE_FORM] = intToChar(SINEW);
+  setpriority(PRIO_PROCESS, 0, atoi(parameters[D_PRIORITY]));
   int choice;
   bool error = false;
   do
@@ -92,7 +94,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Sine wave is chosen.\n";
-          parameters[WAVE_FORM] = 1;
+          parameters[WAVE_FORM] = intToChar(1);
           pressKeyToContinue();
           break;
        }
@@ -101,7 +103,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Square wave is chosen.\n";
-          parameters[WAVE_FORM] = 2;
+          parameters[WAVE_FORM] = intToChar(2);
           pressKeyToContinue();
          break;
        }
@@ -110,7 +112,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Triangle wave is chosen.\n";
-          parameters[WAVE_FORM] = 3;
+          parameters[WAVE_FORM] = intToChar(3);
           pressKeyToContinue();
          break;
        }
@@ -119,7 +121,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Sawtooth wave is chosen.\n";
-          parameters[WAVE_FORM] = 4;
+          parameters[WAVE_FORM] = intToChar(4);
           pressKeyToContinue();
          break;
        }
@@ -133,26 +135,49 @@ void Menu::waveformMenu()
 void Menu::playMidiFile()
 {
     string file_name;
-    //Tworzenie i usuwanie procesów
-    //pid_t tab[3];
+    pid_t pid_tab[2];
     cout << "Enter name of MIDI file:\n";
     cin >> file_name;
-    /*char name [file_name.size()+1];
-    file_name.copy(name, file_name.size()+1);
-    name[file_name.size()] = '\0';
-    // Create first process
-    pid_t pid = fork();
-    if( pid == 0){
-        char *argv[] = {"processC", name, NULL};
+    pid_t pid0 = fork();
+    if( pid0 == 0){
+        char *argv[] = {"processA", stringToChar(file_name), parameters[WAVE_FORM], NULL};
+        setpriority(PRIO_PROCESS, 0, atoi(parameters[A_PRIORITY]));
+        execve("./processA", argv, NULL);
+    } else pid_tab[0] = pid0;
+
+    string test_file_name = "test";
+    time_t current_time = time(NULL);
+    test_file_name += std::asctime(std::localtime(&current_time));
+    test_file_name += ".txt";
+    pid_t pid1 = fork();
+    if( pid1 == 0){
+        char *argv[] = {"processC", stringToChar(test_file_name), parameters[SAVING_PERIOD], NULL};
+        setpriority(PRIO_PROCESS, 0, atoi(parameters[C_PRIORITY]));
         execve("./processC", argv, NULL);
-    } else tab[0] = pid;
-    //ustalanie priorytetów
-    setpriority(PRIO_PROCESS, 0, 19);
-    */
+    } else pid_tab[1] = pid1;
+
+
     cout << "Playing file " << file_name << "\nEnter any key to quit ...\n";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    //usuwanie odpowiednich procesów
-    //kill(tab[0], SIGABRT);
+    kill(pid_tab[1], SIGABRT);
+    kill(pid_tab[0], SIGABRT);
+}
+
+char* Menu::intToChar(int numb)
+{
+  string s_numb = to_string(SINEW);
+  char result[s_numb.size()+1];
+  s_numb.copy(result, s_numb.size()+1);
+  result[s_numb.size()] = '\0';
+  return result;
+}
+
+char* Menu::stringToChar(std::string s)
+{
+  char result[s.size()+1];
+  s.copy(result, s.size()+1);
+  result[s.size()] = '\0';
+  return result;
 }

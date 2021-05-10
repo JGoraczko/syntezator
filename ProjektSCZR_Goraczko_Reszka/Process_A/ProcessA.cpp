@@ -10,6 +10,7 @@
 #include <mqueue.h>
 #include <string.h>
 #include <ctime>
+#include <unistd.h>
 
 short SineWave (double time, double freq, const int SAMPLE_RATE)
 {
@@ -77,9 +78,8 @@ void GenerateSamplesFromFile(char* filename, int waveform){
 
             DataChunk *data = new DataChunk;
             for (int s = 0; s < SAMPLE_RATE*duration; ++s){
-
                 if(s%SAMPLE_COUNT == SAMPLE_COUNT - 1){
-                    data->send_time = time(NULL);
+                    data->send_time = std::chrono::high_resolution_clock::now();
                     int sendResult = mq_send(mq, (const char *) data, sizeof(DataChunk), 0);
                     if(sendResult < 0){
                         fprintf(stderr, "%s:%d: ", __func__, __LINE__);
@@ -87,6 +87,7 @@ void GenerateSamplesFromFile(char* filename, int waveform){
                     }
                     delete data;
                     data = new DataChunk;
+                    std::cout << "wysłano";
                 }
                 data->samples[s%SAMPLE_COUNT] = waveFunction(s, 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0)), SAMPLE_RATE);
             }
@@ -101,12 +102,6 @@ void GenerateSamplesFromFile(char* filename, int waveform){
 
 int main(int argc, char * argv[])
 {
-
-
-    //GenerateSamplesFromFile(argv[1], atoi(argv[2]));
-    GenerateSamplesFromFile("Beethoven.mid", 1);
-
-
-
+    GenerateSamplesFromFile(argv[1], atoi(argv[2]));
     return 0;
 }
