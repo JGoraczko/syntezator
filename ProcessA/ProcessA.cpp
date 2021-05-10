@@ -44,6 +44,8 @@ short TriangleWave (double time, double freq, const int SAMPLE_RATE)
 void GenerateSamplesFromFile(char* filename ){
     const int SAMPLE_RATE = 44100;
     smf::MidiFile midiFile;
+    mqd_t mq;
+    mq = mq_open(FIRST_QUEUE_NAME, O_WRONLY);
 
     midiFile.read(filename);
     midiFile.joinTracks();
@@ -58,36 +60,31 @@ void GenerateSamplesFromFile(char* filename ){
             std::cout << 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0));*/
 
             std::vector<sf::Int16> paczka;
+            DataChunk *data = new DataChunk;
             for (int s = 0; s < SAMPLE_RATE*duration; ++s){
-                paczka.push_back(SineWave(s, 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0)), SAMPLE_RATE));
-
+                if(s%SAMPLE_COUNT == SAMPLE_COUNT - 1){
+                    mq_send(mq, (const char *) data, sizeof(DataChunk), 0);
+                    delete data;
+                    data = new DataChunk;
+                }
+                data->samples[s%SAMPLE_COUNT] = SineWave(s, 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0)), SAMPLE_RATE);
             }
-            sf::SoundBuffer buffer;
-            buffer.loadFromSamples(&paczka[0], paczka.size(), 1, SAMPLE_RATE);
-
+            mq_send(mq, (const char *) data, sizeof(DataChunk), 0);
 
         }
+
     }
 
-
-    std::this_thread::sleep_for(std::chrono::seconds(20));
+     mq_close(mq);
 }
 
 int main()
 {
     GenerateSamplesFromFile("Beethoven.mid");
-    mqd_t mq;
-    DataChunk data;
-    mq = mq_open(FIRST_QUEUE_NAME, O_WRONLY);
 
-    do {
 
-        memset(&data, 0, sizeof(DataChunk));
-        mq_send(mq, (const char *) &data, sizeof(DataChunk), 0);
 
-    } while(getchar() != 'q');
 
-    mq_close(mq);
 
     return 0;
 }

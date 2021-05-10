@@ -75,19 +75,29 @@
 	<string>
 	<vector>
 
-1620604155 source:/home/jakub/syntezator/ProcessA/ProcessA.cpp
-	<iostream>
+1620605422 source:/home/jakub/syntezator/ProcessC/main.cpp
+	<SFML/Audio.hpp>
 	<thread>
 	<chrono>
+	<iostream>
 	<cmath>
-	<SFML/Audio.hpp>
+	<stdbool.h>
 	"MidiFile.h"
 	"MidiEvent.h"
 	"MidiMessage.h"
-	"datachunk.h"
 	<mqueue.h>
-	<string.h>
+	"ProcessC.hpp"
+	"datachunk.h"
+	<iostream>
 
-1620602227 /home/jakub/syntezator//datachunk.h
+1620602227 /home/jakub/syntezator/ProcessC/ProcessC.hpp
 	<SFML/Audio.hpp>
+	<vector>
+	<mutex>
+
+1620602227 /home/jakub/syntezator/datachunk.h
+	<SFML/Audio.hpp>
+
+1620602227 source:/home/jakub/syntezator/ProcessC/ProcessC.cpp
+	"ProcessC.hpp"
 

@@ -36,19 +36,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="../../datachunk.h" />
-		<Unit filename="../../midifilelibrary/include/Binasc.h" />
-		<Unit filename="../../midifilelibrary/include/MidiEvent.h" />
-		<Unit filename="../../midifilelibrary/include/MidiEventList.h" />
-		<Unit filename="../../midifilelibrary/include/MidiFile.h" />
-		<Unit filename="../../midifilelibrary/include/MidiMessage.h" />
-		<Unit filename="../../midifilelibrary/include/Options.h" />
-		<Unit filename="../../midifilelibrary/src/Binasc.cpp" />
-		<Unit filename="../../midifilelibrary/src/MidiEvent.cpp" />
-		<Unit filename="../../midifilelibrary/src/MidiEventList.cpp" />
-		<Unit filename="../../midifilelibrary/src/MidiFile.cpp" />
-		<Unit filename="../../midifilelibrary/src/MidiMessage.cpp" />
-		<Unit filename="../../midifilelibrary/src/Options.cpp" />
+		<Unit filename="../datachunk.h" />
 		<Unit filename="../midifilelibrary/include/Binasc.h" />
 		<Unit filename="../midifilelibrary/include/MidiEvent.h" />
 		<Unit filename="../midifilelibrary/include/MidiEventList.h" />
