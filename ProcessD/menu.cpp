@@ -42,8 +42,11 @@ void Menu::getOption (int &choice, int options, bool &error)    //gets correct n
     error = true;
 }
 
-void Menu::mainMenu(void)   //launches main menu
+void Menu::mainMenu(int *arg)   //launches main menu
 {
+  for (int i=0; i<5; ++i)
+    parameters[i]= arg[i];
+  arg[WAVE_FORM] = SINEW;
   int choice;
   bool error = false;
   do
@@ -89,6 +92,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Sine wave is chosen.\n";
+          parameters[WAVE_FORM] = 1;
           pressKeyToContinue();
           break;
        }
@@ -97,6 +101,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Square wave is chosen.\n";
+          parameters[WAVE_FORM] = 2;
           pressKeyToContinue();
          break;
        }
@@ -105,6 +110,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Triangle wave is chosen.\n";
+          parameters[WAVE_FORM] = 3;
           pressKeyToContinue();
          break;
        }
@@ -113,6 +119,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Sawtooth wave is chosen.\n";
+          parameters[WAVE_FORM] = 4;
           pressKeyToContinue();
          break;
        }
@@ -121,6 +128,7 @@ void Menu::waveformMenu()
   }
   while (choice != 5);
 }
+
 
 void Menu::playMidiFile()
 {
