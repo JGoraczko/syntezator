@@ -185,7 +185,7 @@
 	<vector>
 	<mutex>
 
-1620643128 source:/home/lukasz/Pulpit/syntezator/ProcessC/main.cpp
+1620646211 source:/home/lukasz/Pulpit/syntezator/ProcessC/main.cpp
 	<SFML/Audio.hpp>
 	<thread>
 	<chrono>
@@ -202,7 +202,9 @@
 	<thread>
 	<vector>
 	<fstream>
+	<ctime>
 
-1620642719 /home/lukasz/Pulpit/syntezator/datachunk.h
+1620644855 /home/lukasz/Pulpit/syntezator/datachunk.h
 	<SFML/Audio.hpp>
+	<ctime>
 

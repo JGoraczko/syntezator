@@ -14,12 +14,13 @@
 #include <thread>
 #include <vector>
 #include <fstream>
+#include <ctime>
 
-std::vector<int> logs;
+std::vector<double> logs;
 std::mutex mutex_save, mutex_logs;
 int SAVING_PERIOD = 5;
 
-void addLog(int log)
+void addLog(double log)
 {
     std::lock_guard<std::mutex> guard(mutex_logs);
     logs.push_back(log);
@@ -48,8 +49,9 @@ int main()
     const int SAMPLE_RATE = 44100;
     DataChunk data;
 
-    std::thread logSaver (saveLogs);
     MusicPlayer player;
+    mutex_save.lock();
+    std::thread logSaver (saveLogs);
     mqd_t mq;
     struct mq_attr attr;
     attr.mq_flags = 0;
@@ -72,6 +74,9 @@ int main()
         std::cout << bytesRead << "\n";
             buffer.loadFromSamples(&data.samples[0], SAMPLE_COUNT, 1, SAMPLE_RATE);
             player.addSamples(buffer);
+            time_t received_time = time(NULL);
+            double transport_time = difftime(received_time, data.send_time);
+            addLog(transport_time);
         } else {
             fprintf(stderr, "%s:%d: ", __func__, __LINE__);
             perror("Błąd konsumenta");
