@@ -9,6 +9,7 @@
 #include "datachunk.h"
 #include <mqueue.h>
 #include <string.h>
+#include <ctime>
 
 short SineWave (double time, double freq, const int SAMPLE_RATE)
 {
@@ -41,8 +42,23 @@ short TriangleWave (double time, double freq, const int SAMPLE_RATE)
 }
 
 
-void GenerateSamplesFromFile(char* filename ){
+void GenerateSamplesFromFile(char* filename, int waveform){
     const int SAMPLE_RATE = 44100;
+    short (*waveFunction)(double, double, const int);
+    switch(waveform){
+        case 1:
+            waveFunction = &SineWave;
+            break;
+        case 2:
+            waveFunction = &SquareWave;
+            break;
+        case 3:
+            waveFunction = &TriangleWave;
+            break;
+        case 4:
+            waveFunction = &SawWave;
+            break;
+    }
     smf::MidiFile midiFile;
     mqd_t mq;
     mq = mq_open(FIRST_QUEUE_NAME, O_WRONLY);
@@ -59,10 +75,11 @@ void GenerateSamplesFromFile(char* filename ){
             std::cout << midiFile[0][i].getKeyNumber() << " ---------- ";
             std::cout << 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0));*/
 
-            std::vector<sf::Int16> paczka;
             DataChunk *data = new DataChunk;
             for (int s = 0; s < SAMPLE_RATE*duration; ++s){
+
                 if(s%SAMPLE_COUNT == SAMPLE_COUNT - 1){
+                    data->send_time = time(NULL);
                     int sendResult = mq_send(mq, (const char *) data, sizeof(DataChunk), 0);
                     if(sendResult < 0){
                         fprintf(stderr, "%s:%d: ", __func__, __LINE__);
@@ -71,7 +88,7 @@ void GenerateSamplesFromFile(char* filename ){
                     delete data;
                     data = new DataChunk;
                 }
-                data->samples[s%SAMPLE_COUNT] = SineWave(s, 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0)), SAMPLE_RATE);
+                data->samples[s%SAMPLE_COUNT] = waveFunction(s, 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0)), SAMPLE_RATE);
             }
             mq_send(mq, (const char *) data, sizeof(DataChunk), 0);
 
@@ -82,11 +99,12 @@ void GenerateSamplesFromFile(char* filename ){
      mq_close(mq);
 }
 
-int main()
+int main(int argc, char * argv[])
 {
-    GenerateSamplesFromFile("Beethoven.mid");
 
 
+    //GenerateSamplesFromFile(argv[1], atoi(argv[2]));
+    GenerateSamplesFromFile("Beethoven.mid", 1);
 
 
 

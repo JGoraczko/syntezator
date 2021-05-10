@@ -75,7 +75,7 @@
 	<string>
 	<vector>
 
-1620640777 source:/home/jakub/syntezator/ProcessA/ProcessA.cpp
+1620646703 source:/home/jakub/syntezator/ProcessA/ProcessA.cpp
 	<iostream>
 	<thread>
 	<chrono>
@@ -87,7 +87,9 @@
 	"datachunk.h"
 	<mqueue.h>
 	<string.h>
+	<ctime>
 
-1620640661 /home/jakub/syntezator//datachunk.h
+1620646471 /home/jakub/syntezator//datachunk.h
 	<SFML/Audio.hpp>
+	<ctime>
 
