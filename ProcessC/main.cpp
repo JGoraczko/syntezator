@@ -4,9 +4,6 @@
 #include <iostream>
 #include <cmath>
 #include <stdbool.h>
-#include "MidiFile.h"
-#include "MidiEvent.h"
-#include "MidiMessage.h"
 #include <mqueue.h>
 #include "ProcessC.hpp"
 #include "datachunk.h"
