@@ -145,10 +145,7 @@ void Menu::playMidiFile()
         execve("./processA", argv, NULL);
     } else pid_tab[0] = pid0;
 
-    string test_file_name = "test";
-    time_t current_time = time(NULL);
-    test_file_name += std::asctime(std::localtime(&current_time));
-    test_file_name += ".txt";
+    string test_file_name = "test.txt";
     pid_t pid1 = fork();
     if( pid1 == 0){
         char *argv[] = {"processC", stringToChar(test_file_name), parameters[SAVING_PERIOD], NULL};
