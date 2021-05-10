@@ -6,9 +6,8 @@
 #define A_PRIORITY 0
 #define C_PRIORITY 1
 #define D_PRIORITY 2
-#define BUFFER_SIZE 3
-#define N_SAMPLES_SAVED 4
-#define WAVE_FORM 5
+#define SAVING_PERIOD 3
+#define WAVE_FORM 4
 #define SINEW 1
 
 class Menu
@@ -19,7 +18,7 @@ class Menu
 
    private:
 
-     int parameters[6];
+     int parameters[5];
      void pressKeyToContinue (void);
      int getInfo (bool &error);
      void getInt (int &choice, bool &error);

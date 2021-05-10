@@ -5,10 +5,10 @@ using namespace std;
 
 int main(int argc, char * argv[])
 {
-    if (argc != 6) return -1;
+    if (argc != 5) return -1;
 
-    int arg[5];
-    for (int i=0; i<5; ++i)
+    int arg[4];
+    for (int i=0; i<4; ++i)
         arg[i]= stoi(argv[i+1]);
 
     Menu menu;

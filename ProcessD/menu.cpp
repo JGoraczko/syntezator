@@ -44,7 +44,7 @@ void Menu::getOption (int &choice, int options, bool &error)    //gets correct n
 
 void Menu::mainMenu(int *arg)   //launches main menu
 {
-  for (int i=0; i<5; ++i)
+  for (int i=0; i<4; ++i)
     parameters[i]= arg[i];
   arg[WAVE_FORM] = SINEW;
   int choice;
