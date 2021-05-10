@@ -63,9 +63,11 @@ void GenerateSamplesFromFile(char* filename ){
             DataChunk *data = new DataChunk;
             for (int s = 0; s < SAMPLE_RATE*duration; ++s){
                 if(s%SAMPLE_COUNT == SAMPLE_COUNT - 1){
-                    mq_send(mq, (const char *) data, sizeof(DataChunk), 0);
-                    fprintf(stderr, "%s:%d: ", __func__, __LINE__);
-                    perror("Błąd producenta");
+                    int sendResult = mq_send(mq, (const char *) data, sizeof(DataChunk), 0);
+                    if(sendResult < 0){
+                        fprintf(stderr, "%s:%d: ", __func__, __LINE__);
+                        perror("Błąd producenta");
+                    }
                     delete data;
                     data = new DataChunk;
                 }

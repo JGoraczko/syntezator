@@ -2,7 +2,7 @@
 #define DATA_CHUNK_INCLUDED
 
 #include <SFML/Audio.hpp>
-#define SAMPLE_COUNT 100
+#define SAMPLE_COUNT 1000
 #define FIRST_QUEUE_NAME "/first_queue"
 
 typedef struct DataChunk

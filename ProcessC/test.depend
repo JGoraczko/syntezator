@@ -75,7 +75,7 @@
 	<string>
 	<vector>
 
-1620640238 source:/home/jakub/syntezator/ProcessC/main.cpp
+1620640546 source:/home/jakub/syntezator/ProcessC/main.cpp
 	<SFML/Audio.hpp>
 	<thread>
 	<chrono>
@@ -95,7 +95,7 @@
 	<vector>
 	<mutex>
 
-1620639134 /home/jakub/syntezator/datachunk.h
+1620640661 /home/jakub/syntezator/datachunk.h
 	<SFML/Audio.hpp>
 
 1620636855 source:/home/jakub/syntezator/ProcessC/ProcessC.cpp

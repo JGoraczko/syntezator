@@ -29,8 +29,10 @@ int main()
 
     mq_unlink(FIRST_QUEUE_NAME);
     mq = mq_open(FIRST_QUEUE_NAME, O_CREAT | O_RDONLY | O_EXCL, 0777, &attr);
-    fprintf(stderr, "%s:%d: ", __func__, __LINE__);
-    perror("Błąd utworzenia kolejki");
+    if(mq < 0){
+        fprintf(stderr, "%s:%d: ", __func__, __LINE__);
+        perror("Błąd utworzenia kolejki");
+    }
 
     do {
         sf::SoundBuffer buffer;
