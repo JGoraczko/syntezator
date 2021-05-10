@@ -18,7 +18,7 @@
 
 std::vector<double> logs;
 std::mutex mutex_save, mutex_logs;
-int SAVING_PERIOD = 5;
+int SAVING_PERIOD;
 
 void addLog(double log)
 {
@@ -44,8 +44,10 @@ void saveLogs()
     }
 }
 
-int main()
+int main(int argc, char * argv[])
 {
+    if (argc < 2) return -1;
+    SAVING_PERIOD = std::stoi(argv[1]);
     const int SAMPLE_RATE = 44100;
     DataChunk data;
 
