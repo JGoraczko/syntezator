@@ -11,13 +11,44 @@
 #include "ProcessC.hpp"
 #include "datachunk.h"
 #include <iostream>
+#include <thread>
+#include <vector>
+#include <fstream>
 
+std::vector<int> logs;
+std::mutex mutex_save, mutex_logs;
+int SAVING_PERIOD = 5;
+
+void addLog(int log)
+{
+    std::lock_guard<std::mutex> guard(mutex_logs);
+    logs.push_back(log);
+    if (logs.size() == SAVING_PERIOD) mutex_save.unlock();
+}
+
+void saveLogs()
+{
+    while (true)
+    {
+        mutex_save.lock();
+        mutex_logs.lock();
+        std::fstream file;
+        file.open("test.txt", std::ios::out);
+        if (!file) exit(-1);
+        for(int i=0; i<logs.size(); ++i)
+            file << logs[i] << std::endl;
+        file.close();
+        logs.clear();
+        mutex_logs.unlock();
+    }
+}
 
 int main()
 {
     const int SAMPLE_RATE = 44100;
     DataChunk data;
 
+    std::thread logSaver (saveLogs);
     MusicPlayer player;
     mqd_t mq;
     struct mq_attr attr;
