@@ -141,7 +141,7 @@ void Menu::playMidiFile()
     char *f_name = (char *) file_name.c_str();
     pid_t pid0 = fork();
     if( pid0 == 0){
-        char *argv[] = {"./processA", f_name, parameters[WAVE_FORM], NULL};
+        char *argv[] = {(char *) "./processA", f_name, parameters[WAVE_FORM], NULL};
         setpriority(PRIO_PROCESS, 0, atoi(parameters[A_PRIORITY]));
         execve("./processA", argv, NULL);
     } else pid_tab[0] = pid0;
@@ -154,7 +154,7 @@ void Menu::playMidiFile()
     char *test_f_name = (char *) test_file_name.c_str();
     pid_t pid1 = fork();
     if( pid1 == 0){
-        char *argv2[] = {"./processC", test_f_name, parameters[SAVING_PERIOD], NULL};
+        char *argv2[] = {(char *) "./processC", test_f_name, parameters[SAVING_PERIOD], NULL};
         setpriority(PRIO_PROCESS, 0, atoi(parameters[C_PRIORITY]));
         execve("./processC", argv2, NULL);
     } else pid_tab[1] = pid1;
