@@ -34,8 +34,11 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-fexceptions" />
+			<Add option="-fexceptions -lrt" />
 		</Compiler>
+		<Linker>
+			<Add option="-lrt" />
+		</Linker>
 		<Unit filename="../datachunk.h" />
 		<Unit filename="../midifilelibrary/include/Binasc.h" />
 		<Unit filename="../midifilelibrary/include/MidiEvent.h" />
@@ -50,9 +53,6 @@
 		<Unit filename="../midifilelibrary/src/MidiMessage.cpp" />
 		<Unit filename="../midifilelibrary/src/Options.cpp" />
 		<Unit filename="ProcessA.cpp" />
-		<Extensions>
-			<code_completion />
-			<debugger />
-		</Extensions>
+		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

@@ -27,7 +27,6 @@ class Menu
      void waveformMenu (void);
      void playMidiFile(void);
      char* intToChar(int numb);
-     char* stringToChar(std::string s);
 };
 
 #endif // MENU_H_INCLUDED

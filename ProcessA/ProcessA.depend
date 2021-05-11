@@ -1,0 +1,96 @@
+# depslib dependency file v1.0
+1620571401 source:/home/lukasz/Pulpit/syntezator/midifilelibrary/src/Binasc.cpp
+	"Binasc.h"
+	<sstream>
+	<stdlib.h>
+
+1620571401 /home/lukasz/Pulpit/syntezator/midifilelibrary/include/Binasc.h
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<stdlib.h>
+
+1620571401 source:/home/lukasz/Pulpit/syntezator/midifilelibrary/src/MidiEvent.cpp
+	"MidiEvent.h"
+	<stdlib.h>
+
+1620571401 /home/lukasz/Pulpit/syntezator/midifilelibrary/include/MidiEvent.h
+	"MidiMessage.h"
+	<vector>
+
+1620571401 /home/lukasz/Pulpit/syntezator/midifilelibrary/include/MidiMessage.h
+	<vector>
+	<string>
+
+1620571401 source:/home/lukasz/Pulpit/syntezator/midifilelibrary/src/MidiEventList.cpp
+	"MidiEventList.h"
+	<vector>
+	<algorithm>
+	<iterator>
+	<utility>
+	"stdlib.h"
+
+1620571401 /home/lukasz/Pulpit/syntezator/midifilelibrary/include/MidiEventList.h
+	"MidiEvent.h"
+	<vector>
+
+1620571401 source:/home/lukasz/Pulpit/syntezator/midifilelibrary/src/MidiFile.cpp
+	"MidiFile.h"
+	"Binasc.h"
+	<string>
+	<vector>
+	<iostream>
+	<iomanip>
+	<fstream>
+	<sstream>
+	<iterator>
+	<algorithm>
+
+1620571401 /home/lukasz/Pulpit/syntezator/midifilelibrary/include/MidiFile.h
+	"MidiEventList.h"
+	<vector>
+	<string>
+	<istream>
+	<fstream>
+
+1620571401 source:/home/lukasz/Pulpit/syntezator/midifilelibrary/src/MidiMessage.cpp
+	"MidiMessage.h"
+	<vector>
+	<iostream>
+	<iterator>
+
+1620571401 source:/home/lukasz/Pulpit/syntezator/midifilelibrary/src/Options.cpp
+	"Options.h"
+	<stdlib.h>
+	<string>
+	<vector>
+	<cctype>
+	<iostream>
+	<algorithm>
+
+1620571401 /home/lukasz/Pulpit/syntezator/midifilelibrary/include/Options.h
+	<iostream>
+	<map>
+	<string>
+	<vector>
+
+1620652836 source:/home/lukasz/Pulpit/syntezator/ProcessA/ProcessA.cpp
+	<iostream>
+	<thread>
+	<chrono>
+	<cmath>
+	<SFML/Audio.hpp>
+	"MidiFile.h"
+	"MidiEvent.h"
+	"MidiMessage.h"
+	"datachunk.h"
+	<mqueue.h>
+	<string.h>
+	<ctime>
+	<unistd.h>
+
+1620652634 /home/lukasz/Pulpit/syntezator/ProcessA/datachunk.h
+	<SFML/Audio.hpp>
+	<ctime>
+

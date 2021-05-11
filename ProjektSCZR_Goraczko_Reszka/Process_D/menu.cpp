@@ -138,19 +138,25 @@ void Menu::playMidiFile()
     pid_t pid_tab[2];
     cout << "Enter name of MIDI file:\n";
     cin >> file_name;
+    char *f_name = (char *) file_name.c_str();
     pid_t pid0 = fork();
     if( pid0 == 0){
-        char *argv[] = {"processA", stringToChar(file_name), parameters[WAVE_FORM], NULL};
+        char *argv[] = {"./processA", f_name, parameters[WAVE_FORM], NULL};
         setpriority(PRIO_PROCESS, 0, atoi(parameters[A_PRIORITY]));
         execve("./processA", argv, NULL);
     } else pid_tab[0] = pid0;
 
-    string test_file_name = "test.txt";
+    string test_file_name = "test";
+    time_t current_time = time(NULL);
+    test_file_name += std::asctime(std::localtime(&current_time));
+    test_file_name.pop_back();
+    test_file_name += ".txt";
+    char *test_f_name = (char *) test_file_name.c_str();
     pid_t pid1 = fork();
     if( pid1 == 0){
-        char *argv[] = {"processC", stringToChar(test_file_name), parameters[SAVING_PERIOD], NULL};
+        char *argv2[] = {"./processC", test_f_name, parameters[SAVING_PERIOD], NULL};
         setpriority(PRIO_PROCESS, 0, atoi(parameters[C_PRIORITY]));
-        execve("./processC", argv, NULL);
+        execve("./processC", argv2, NULL);
     } else pid_tab[1] = pid1;
 
 
@@ -164,17 +170,7 @@ void Menu::playMidiFile()
 
 char* Menu::intToChar(int numb)
 {
-  string s_numb = to_string(SINEW);
-  char result[s_numb.size()+1];
-  s_numb.copy(result, s_numb.size()+1);
-  result[s_numb.size()] = '\0';
-  return result;
-}
-
-char* Menu::stringToChar(std::string s)
-{
-  char result[s.size()+1];
-  s.copy(result, s.size()+1);
-  result[s.size()] = '\0';
+  string s_numb = to_string(numb);
+  char *result = (char *) s_numb.c_str();
   return result;
 }

@@ -28,16 +28,16 @@
 	<csignal>
 	<sys/resource.h>
 
-1620657482 source:/home/lukasz/Pulpit/syntezator/ProcessD/main.cpp
+1620761783 source:/home/lukasz/Pulpit/syntezator/ProcessD/main.cpp
 	"menu.h"
 	<iostream>
 	<ctime>
 
-1620654914 /home/lukasz/Pulpit/syntezator/ProcessD/menu.h
+1620761796 /home/lukasz/Pulpit/syntezator/ProcessD/menu.h
 	<vector>
 	<string>
 
-1620655586 source:/home/lukasz/Pulpit/syntezator/ProcessD/menu.cpp
+1620761774 source:/home/lukasz/Pulpit/syntezator/ProcessD/menu.cpp
 	"menu.h"
 	<limits>
 	<cstdarg>

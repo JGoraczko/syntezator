@@ -187,16 +187,13 @@
 	<vector>
 	<mutex>
 
-1620648570 source:/home/lukasz/Pulpit/syntezator/ProcessC/main.cpp
+1620653379 source:/home/lukasz/Pulpit/syntezator/ProcessC/main.cpp
 	<SFML/Audio.hpp>
 	<thread>
 	<chrono>
 	<iostream>
 	<cmath>
 	<stdbool.h>
-	"MidiFile.h"
-	"MidiEvent.h"
-	"MidiMessage.h"
 	<mqueue.h>
 	"ProcessC.hpp"
 	"datachunk.h"
@@ -206,7 +203,7 @@
 	<fstream>
 	<ctime>
 
-1620644855 /home/lukasz/Pulpit/syntezator/datachunk.h
+1620652634 /home/lukasz/Pulpit/syntezator/datachunk.h
 	<SFML/Audio.hpp>
 	<ctime>
 
