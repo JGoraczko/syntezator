@@ -138,14 +138,7 @@ void Menu::playMidiFile()
     pid_t pid_tab[2];
     cout << "Enter name of MIDI file:\n";
     cin >> file_name;
-    char *f_name = (char *) file_name.c_str();
-    pid_t pid0 = fork();
-    if( pid0 == 0){
-        char *argv[] = {(char *) "./processA", f_name, parameters[WAVE_FORM], NULL};
-        setpriority(PRIO_PROCESS, 0, atoi(parameters[A_PRIORITY]));
-        execve("./processA", argv, NULL);
-    } else pid_tab[0] = pid0;
-
+    
     string test_file_name = "test";
     time_t current_time = time(NULL);
     test_file_name += std::asctime(std::localtime(&current_time));
@@ -158,7 +151,14 @@ void Menu::playMidiFile()
         setpriority(PRIO_PROCESS, 0, atoi(parameters[C_PRIORITY]));
         execve("./processC", argv2, NULL);
     } else pid_tab[1] = pid1;
-
+    
+    char *f_name = (char *) file_name.c_str();
+    pid_t pid0 = fork();
+    if( pid0 == 0){
+        char *argv[] = {(char *) "./processA", f_name, parameters[WAVE_FORM], NULL};
+        setpriority(PRIO_PROCESS, 0, atoi(parameters[A_PRIORITY]));
+        execve("./processA", argv, NULL);
+    } else pid_tab[0] = pid0;
 
     cout << "Playing file " << file_name << "\nEnter any key to quit ...\n";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');

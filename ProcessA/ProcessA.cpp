@@ -87,7 +87,6 @@ void GenerateSamplesFromFile(char* filename, int waveform){
                     }
                     delete data;
                     data = new DataChunk;
-                    std::cout << "wysłano";
                 }
                 data->samples[s%SAMPLE_COUNT] = waveFunction(s, 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0)), SAMPLE_RATE);
             }
@@ -104,5 +103,6 @@ int main(int argc, char * argv[])
 {
     //GenerateSamplesFromFile(argv[1], atoi(argv[2]));
     GenerateSamplesFromFile("Beethoven.mid", 1);
+
     return 0;
 }

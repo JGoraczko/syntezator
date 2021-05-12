@@ -75,7 +75,7 @@
 	<string>
 	<vector>
 
-1620652836 source:/home/lukasz/Pulpit/syntezator/ProcessA/ProcessA.cpp
+1620831469 source:/home/lukasz/Pulpit/syntezator/ProcessA/ProcessA.cpp
 	<iostream>
 	<thread>
 	<chrono>
