@@ -103,5 +103,6 @@ void GenerateSamplesFromFile(char* filename, int waveform){
 int main(int argc, char * argv[])
 {
     GenerateSamplesFromFile(argv[1], atoi(argv[2]));
+
     return 0;
 }

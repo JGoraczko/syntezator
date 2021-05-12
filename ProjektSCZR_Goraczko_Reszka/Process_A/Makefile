@@ -5,8 +5,8 @@ TARGET = processA
 $(TARGET): ProcessA.o libmidifile.a
 	$(CXX) ProcessA.o libmidifile.a -o $(TARGET) -lsfml-audio -lrt
 
-ProcessA.o: ProcessA.cpp MidiEvent.h MidiEventList.h MidiMessage.h MidiFile.h
-	$(CXX) $(CXXFLAGS) -c ProcessA.cpp MidiEvent.h MidiEventList.h MidiMessage.h MidiFile.h
+ProcessA.o: ProcessA.cpp MidiEvent.h MidiMessage.h MidiFile.h
+	$(CXX) $(CXXFLAGS) -c ProcessA.cpp MidiEvent.h MidiMessage.h MidiFile.h -I ../
 
 .PHONY: clean
 clean:

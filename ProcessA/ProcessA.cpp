@@ -102,6 +102,7 @@ void GenerateSamplesFromFile(char* filename, int waveform){
 
 int main(int argc, char * argv[])
 {
-    GenerateSamplesFromFile(argv[1], atoi(argv[2]));
+    //GenerateSamplesFromFile(argv[1], atoi(argv[2]));
+    GenerateSamplesFromFile("Beethoven.mid", 1);
     return 0;
 }

@@ -3,6 +3,7 @@
 
 #include <SFML/Audio.hpp>
 #include <ctime>
+#include <chrono>
 #define SAMPLE_COUNT 1000
 #define FIRST_QUEUE_NAME "/first_queue"
 

@@ -6,7 +6,7 @@ $(TARGET): main.o ProcessC.o
 	$(CXX) main.o ProcessC.o -o $(TARGET) -lsfml-audio -pthread -lrt
 
 main.o: main.cpp ProcessC.hpp
-	$(CXX) $(CXXFLAGS) -c main.cpp ProcessC.hpp
+	$(CXX) $(CXXFLAGS) -c main.cpp ProcessC.hpp -I ../
 
 ProcessC.o: ProcessC.hpp ProcessC.cpp 
 	$(CXX) $(CXXFLAGS) -c ProcessC.hpp ProcessC.cpp
