@@ -105,8 +105,9 @@ void GenerateSamplesFromFile(char* filename, int waveform){
 
 int main(int argc, char * argv[])
 {
-    //GenerateSamplesFromFile(argv[1], atoi(argv[2]));
-    
-    GenerateSamplesFromFile((char *) "Beethoven.mid", 1);
+    char * music_file_name = argv[1];
+    int wave_form = std::atoi(argv[2]);
+    GenerateSamplesFromFile(music_file_name, wave_form);
+      
     return 0;
 }

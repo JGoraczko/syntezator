@@ -75,7 +75,7 @@
 	<string>
 	<vector>
 
-1620831469 source:/home/lukasz/Pulpit/syntezator/ProcessA/ProcessA.cpp
+1621019577 source:/home/lukasz/Pulpit/syntezator/ProcessA/ProcessA.cpp
 	<iostream>
 	<thread>
 	<chrono>
@@ -89,6 +89,7 @@
 	<string.h>
 	<ctime>
 	<unistd.h>
+	<string>
 
 1620820163 /home/lukasz/Pulpit/syntezator/ProcessA/datachunk.h
 	<SFML/Audio.hpp>
