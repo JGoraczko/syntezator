@@ -36,7 +36,7 @@ bool MusicPlayer::onGetData(Chunk& data)
     else
     {
         data.sampleCount = samples.size() - currentSample;
-        currentSample = samples.size();
+        currentSample = samples.size();       
         return false;
     }
 }

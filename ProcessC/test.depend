@@ -179,10 +179,10 @@
 	<string>
 	<vector>
 
-1620584270 source:/home/lukasz/Pulpit/syntezator/ProcessC/ProcessC.cpp
+1620997851 source:/home/lukasz/Pulpit/syntezator/ProcessC/ProcessC.cpp
 	"ProcessC.hpp"
 
-1620584201 /home/lukasz/Pulpit/syntezator/ProcessC/ProcessC.hpp
+1620997650 /home/lukasz/Pulpit/syntezator/ProcessC/ProcessC.hpp
 	<SFML/Audio.hpp>
 	<vector>
 	<mutex>
@@ -203,9 +203,10 @@
 	<fstream>
 	<ctime>
 
-1620652634 /home/lukasz/Pulpit/syntezator/datachunk.h
+1620820185 /home/lukasz/Pulpit/syntezator/datachunk.h
 	<SFML/Audio.hpp>
 	<ctime>
+	<chrono>
 
 1620650239 /home/jakub/syntezator/ProcessC/datachunk.h
 	<SFML/Audio.hpp>

@@ -54,10 +54,18 @@ int main(int argc, char * argv[])
     mutex_save.lock();
     std::thread logSaver (saveLogs, file_name);
     mqd_t mq;
-    mq = mq_open(FIRST_QUEUE_NAME, O_RDONLY);
+    struct mq_attr attr;
+    attr.mq_flags = 0;
+    attr.mq_maxmsg = 50;
+    attr.mq_msgsize = sizeof(DataChunk);
+    attr.mq_curmsgs = 0;
+
+
+    mq_unlink(FIRST_QUEUE_NAME);
+    mq = mq_open(FIRST_QUEUE_NAME, O_CREAT | O_RDONLY | O_EXCL, 0777, &attr);
     if(mq < 0){
         fprintf(stderr, "%s:%d: ", __func__, __LINE__);
-        perror("Błąd otworzenia kolejki przez konsumenta");
+        perror("Błąd utworzenia kolejki");
     }
 
     do {
@@ -78,6 +86,6 @@ int main(int argc, char * argv[])
 
     mq_close(mq);
     mq_unlink(FIRST_QUEUE_NAME);
-    
+
     return 0;
 }
