@@ -78,6 +78,6 @@ int main(int argc, char * argv[])
 
     mq_close(mq);
     mq_unlink(FIRST_QUEUE_NAME);
-
+    
     return 0;
 }
