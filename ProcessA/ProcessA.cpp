@@ -11,6 +11,7 @@
 #include <string.h>
 #include <ctime>
 #include <unistd.h>
+#include <string>
 
 short SineWave (double time, double freq, const int SAMPLE_RATE)
 {
@@ -101,7 +102,10 @@ void GenerateSamplesFromFile(char* filename, int waveform){
 
 int main(int argc, char * argv[])
 {
-    GenerateSamplesFromFile(argv[1], atoi(argv[2]));   
+    int wave_form = std::atoi(argv[2]);
+    char * music_file_name = argv[1];
+    GenerateSamplesFromFile(music_file_name, wave_form);
 
+    //GenerateSamplesFromFile((char *) "Beethoven.mid", 2);
     return 0;
 }

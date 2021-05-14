@@ -13,7 +13,7 @@ implementacji zostanie prawdopodobnie użyta **ALSA Library API** (zapewnia inte
 sterowników ALSA).
 
 ## Schemat działania
-Na implementowany syntezator składają się 4 procesy:oxford
+Na implementowany syntezator składają się 4 procesy:
 - Proces A pobiera informacje w formacie MIDI i generuje dźwięk na ich podstawie.
 - Proces B przetwarza próbki nakładając filtr.
 - Proces C przesyła na wyjście audio karty dźwiękowej.

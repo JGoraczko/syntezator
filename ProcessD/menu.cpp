@@ -47,7 +47,6 @@ void Menu::mainMenu(char *arg[])   //launches main menu
 {
   for (int i=0; i<4; ++i)
     parameters[i]= arg[i];
-  parameters[WAVE_FORM] = intToChar(SINEW);
   setpriority(PRIO_PROCESS, 0, atoi(parameters[D_PRIORITY]));
   int choice;
   bool error = false;
@@ -94,7 +93,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Sine wave is chosen.\n";
-          parameters[WAVE_FORM] = intToChar(1);
+          wave_form = 1;
           pressKeyToContinue();
           break;
        }
@@ -103,7 +102,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Square wave is chosen.\n";
-          parameters[WAVE_FORM] = intToChar(2);
+          wave_form = 2;
           pressKeyToContinue();
          break;
        }
@@ -112,7 +111,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Triangle wave is chosen.\n";
-          parameters[WAVE_FORM] = intToChar(3);
+          wave_form = 3;
           pressKeyToContinue();
          break;
        }
@@ -121,7 +120,7 @@ void Menu::waveformMenu()
        {
           system("clear");
           cout << "Sawtooth wave is chosen.\n";
-          parameters[WAVE_FORM] = intToChar(4);
+          wave_form = 4;
           pressKeyToContinue();
          break;
        }
@@ -139,9 +138,11 @@ void Menu::playMidiFile()
     cout << "Enter name of MIDI file:\n";
     cin >> file_name;
     char *f_name = (char *) file_name.c_str();
+    string s_numb = to_string(wave_form);
+    char *wave_numb = (char *) s_numb.c_str();
     pid_t pid0 = fork();
     if( pid0 == 0){
-        char *argv[] = {(char *) "./processA", f_name, parameters[WAVE_FORM], NULL};
+        char *argv[] = {(char *) "./processA", f_name, wave_numb, NULL};
         setpriority(PRIO_PROCESS, 0, atoi(parameters[A_PRIORITY]));
         execve("./processA", argv, NULL);
     } else pid_tab[0] = pid0;
@@ -166,11 +167,4 @@ void Menu::playMidiFile()
 
     kill(pid_tab[1], SIGABRT);
     kill(pid_tab[0], SIGABRT);
-}
-
-char* Menu::intToChar(int numb)
-{
-  string s_numb = to_string(numb);
-  char *result = (char *) s_numb.c_str();
-  return result;
 }
