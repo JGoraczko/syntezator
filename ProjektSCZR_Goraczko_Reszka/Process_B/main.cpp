@@ -1,4 +1,5 @@
 #include <mqueue.h>
+#include "Iir.h"
 #include "../datachunk.h"
 
 int main(int argc, char * argv[])
@@ -14,12 +15,21 @@ int main(int argc, char * argv[])
         perror("Błąd otworzenia kolejki C przez B");
     }
 
+    const int order = 4; 
+    Iir::Butterworth::LowPass<order> filter;
+    const float samplingrate = 44100;
+    const float cutoff_frequency = 800;
+    filter.setup (samplingrate, cutoff_frequency);
+
     do {
         DataChunk data;
         int bytesRead = mq_receive(mqB, (char *) &data, sizeof(DataChunk), NULL);
         if(bytesRead > 0){
-	// tu będzie filtrowanie        
-	    int sendResult = mq_send(mqC, (const char *) &data, sizeof(DataChunk), 0);
+	    DataChunk dataFiltered = data;
+	    for(int i = 0; i < SAMPLE_COUNT; ++i){
+		dataFiltered.samples[i] = filter.filter(data.samples[i]);
+	    }     
+	    int sendResult = mq_send(mqC, (const char *) &dataFiltered, sizeof(DataChunk), 0);
             if(sendResult < 0){
             	fprintf(stderr, "%s:%d: ", __func__, __LINE__);
             	perror("Błąd producenta B");
@@ -36,4 +46,5 @@ int main(int argc, char * argv[])
     } while (1);
 
     mq_close(mqB);
+    mq_close(mqC);
 }

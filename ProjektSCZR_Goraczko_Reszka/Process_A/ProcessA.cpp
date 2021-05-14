@@ -107,6 +107,6 @@ int main(int argc, char * argv[])
 {
     //GenerateSamplesFromFile(argv[1], atoi(argv[2]));
     
-    GenerateSamplesFromFile((char *) "Beethoven.mid", 1);
+    GenerateSamplesFromFile((char *) "Beethoven.mid", 3);
     return 0;
 }
