@@ -13,20 +13,33 @@ int main(int argc, char * argv[])
     for (int i=0; i<4; ++i)
         arg[i]= argv[i+1];
 
-    mq_unlink(FIRST_QUEUE_NAME);
-    mqd_t mq;
-    struct mq_attr attr;
-    attr.mq_flags = 0;
-    attr.mq_maxmsg = 50;
-    attr.mq_msgsize = sizeof(DataChunk);
-    attr.mq_curmsgs = 0;
-    mq = mq_open(FIRST_QUEUE_NAME, O_CREAT | O_RDONLY | O_EXCL, 0777, &attr);
-    if(mq < 0){
+    mq_unlink(PROCESS_B_QUEUE_NAME);
+    mqd_t mqB;
+    struct mq_attr attrB;
+    attrB.mq_flags = 0;
+    attrB.mq_maxmsg = 50;
+    attrB.mq_msgsize = sizeof(DataChunk);
+    attrB.mq_curmsgs = 0;
+    mqB = mq_open(PROCESS_B_QUEUE_NAME, O_CREAT | O_EXCL, 0777, &attrB);
+    if(mqB < 0){
         fprintf(stderr, "%s:%d: ", __func__, __LINE__);
-        perror("Błąd utworzenia kolejki");
+        perror("Błąd utworzenia kolejki B");
+    }
+    mq_unlink(PROCESS_C_QUEUE_NAME);
+    mqd_t mqC;
+    struct mq_attr attrC;
+    attrC.mq_flags = 0;
+    attrC.mq_maxmsg = 50;
+    attrC.mq_msgsize = sizeof(DataChunk);
+    attrC.mq_curmsgs = 0;
+    mqC = mq_open(PROCESS_C_QUEUE_NAME, O_CREAT | O_EXCL, 0777, &attrC);
+    if(mqC < 0){
+        fprintf(stderr, "%s:%d: ", __func__, __LINE__);
+        perror("Błąd utworzenia kolejki C");
     }
     Menu menu;
     menu.mainMenu(arg);
-    mq_unlink(FIRST_QUEUE_NAME);
+    mq_unlink(PROCESS_B_QUEUE_NAME);
+    mq_unlink(PROCESS_C_QUEUE_NAME);
     return 0;
 }

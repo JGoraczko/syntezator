@@ -62,7 +62,11 @@ void GenerateSamplesFromFile(char* filename, int waveform){
     }
     smf::MidiFile midiFile;
     mqd_t mq;
-    mq = mq_open(FIRST_QUEUE_NAME, O_WRONLY);
+    mq = mq_open(PROCESS_B_QUEUE_NAME, O_WRONLY);
+    if(mq < 0){
+        fprintf(stderr, "%s:%d: ", __func__, __LINE__);
+        perror("Błąd otworzenia kolejki B przez A");
+    }
 
     midiFile.read(filename);
     midiFile.joinTracks();
@@ -83,7 +87,7 @@ void GenerateSamplesFromFile(char* filename, int waveform){
                     int sendResult = mq_send(mq, (const char *) data, sizeof(DataChunk), 0);
                     if(sendResult < 0){
                         fprintf(stderr, "%s:%d: ", __func__, __LINE__);
-                        perror("Błąd producenta");
+                        perror("Błąd producenta A");
                     }
                     delete data;
                     data = new DataChunk;

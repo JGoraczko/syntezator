@@ -5,7 +5,8 @@
 #include <ctime>
 #include <chrono>
 #define SAMPLE_COUNT 1000
-#define FIRST_QUEUE_NAME "/FIRST_QUEUE"
+#define PROCESS_B_QUEUE_NAME "/process_b_queue"
+#define PROCESS_C_QUEUE_NAME "/process_c_queue"
 
 typedef struct DataChunk
 {

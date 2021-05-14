@@ -160,6 +160,14 @@ void Menu::playMidiFile()
         execve("./processA", argv, NULL);
     } else pid_tab[0] = pid0;
 
+    pid_t pid2 = fork();
+    if( pid2 == 0){
+        char *argv[] = {(char *) "./processB", NULL};
+        //setpriority(PRIO_PROCESS, 0, atoi(parameters[A_PRIORITY]));
+        execve("./processB", argv, NULL);
+    } else pid_tab[0] = pid0;
+
+
     cout << "Playing file " << file_name << "\nEnter any key to quit ...\n";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cin.ignore(numeric_limits<streamsize>::max(), '\n');

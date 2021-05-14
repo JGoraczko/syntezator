@@ -55,10 +55,10 @@ int main(int argc, char * argv[])
     std::thread logSaver (saveLogs, file_name);
     mqd_t mq;
     
-    mq = mq_open(FIRST_QUEUE_NAME, O_RDONLY);
+    mq = mq_open(PROCESS_C_QUEUE_NAME, O_RDONLY);
     if(mq < 0){
         fprintf(stderr, "%s:%d: ", __func__, __LINE__);
-        perror("Błąd otworzenia kolejki przez konsumenta");
+        perror("Błąd otworzenia kolejki C przez C");
     }
 
     do {
@@ -72,13 +72,12 @@ int main(int argc, char * argv[])
             addLog(transport_time);
         } else {
             fprintf(stderr, "%s:%d: ", __func__, __LINE__);
-            perror("Błąd konsumenta");
+            perror("Błąd konsumenta C");
         }
 
     } while (1);
 
     mq_close(mq);
-    mq_unlink(FIRST_QUEUE_NAME);
 
     return 0;
 }
