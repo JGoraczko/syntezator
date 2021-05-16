@@ -16,7 +16,7 @@
 #define SAMPLE_COUNT 1000		//ilość próbek przesyłanych w pojedynczym komunikacie
 
 #define MESSAQE_QUEUES 0
-#define SHARED_MEMORY 0
+#define SHARED_MEMORY 1
 #define COMMUNICATION_STRUCTUR 0
 
 #define SAMPLES_TO_STREAM 30000;	//tyle próbek jest cyklicznie pobieranych przez proces C
