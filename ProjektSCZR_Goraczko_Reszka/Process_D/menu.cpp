@@ -135,6 +135,8 @@ void Menu::playMidiFile()
     pid_t pid_tab[3];
     cout << "Enter name of MIDI file:\n";
     cin >> file_name;
+    
+    //creating A process
     char *f_name = (char *) file_name.c_str();
     string s_numb = to_string(wave_form);
     char *wave_numb = (char *) s_numb.c_str();
@@ -145,22 +147,29 @@ void Menu::playMidiFile()
         execve("./processA", argv, NULL);
     } else pid_tab[0] = pid0;
 
+	//creating B process
+	string testB_file_name = "testB";
+    time_t current_time = time(NULL);
+    testB_file_name += std::asctime(std::localtime(&current_time));
+    testB_file_name.pop_back();
+    testB_file_name += ".txt";
+    char *testB_f_name = (char *) testB_file_name.c_str();
     pid_t pid1 = fork();
     if( pid1 == 0){
-        char *argv1[] = {(char *) "./processB", NULL};
+        char *argv1[] = {(char *) "./processB", (char*) "1", (char*) "10000", testB_f_name, NULL};
         setpriority(PRIO_PROCESS, 0, B_PRIORITY);
         execve("./processB", argv1, NULL);
     } else pid_tab[1] = pid1;
     
-    string test_file_name = "test";
-    time_t current_time = time(NULL);
-    test_file_name += std::asctime(std::localtime(&current_time));
-    test_file_name.pop_back();
-    test_file_name += ".txt";
-    char *test_f_name = (char *) test_file_name.c_str();
+    //creating C process
+    string testC_file_name = "testC";
+    testC_file_name += std::asctime(std::localtime(&current_time));
+    testC_file_name.pop_back();
+    testC_file_name += ".txt";
+    char *testC_f_name = (char *) testC_file_name.c_str();
     pid_t pid2 = fork();
     if( pid2 == 0){
-        char *argv2[] = {(char *) "./processC", test_f_name, NULL};
+        char *argv2[] = {(char *) "./processC", testC_f_name, NULL};
         setpriority(PRIO_PROCESS, 0, C_PRIORITY);
         execve("./processC", argv2, NULL);
     } else pid_tab[2] = pid2;
