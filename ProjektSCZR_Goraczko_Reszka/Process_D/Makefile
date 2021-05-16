@@ -1,9 +1,9 @@
 CXX = g++
-CXXFLAGS = -std=c++11 -lrt
+CXXFLAGS = -std=c++11 -lrt -pthread 
 TARGET = processD
 
 $(TARGET): main.o menu.o
-	$(CXX) main.o menu.o -o $(TARGET) -lrt
+	$(CXX) main.o menu.o -o $(TARGET) -lrt -pthread 
 
 main.o: main.cpp menu.h
 	$(CXX) $(CXXFLAGS) -c main.cpp menu.h -I \..

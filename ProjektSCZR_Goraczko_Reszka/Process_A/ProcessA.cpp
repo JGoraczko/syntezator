@@ -7,6 +7,8 @@
 #include "MidiEvent.h"
 #include "MidiMessage.h"
 #include "datachunk.h"
+#include "SharedMemBuff.h"
+#include "test_definitions.h"
 #include <mqueue.h>
 #include <string.h>
 #include <ctime>
@@ -67,7 +69,7 @@ void GenerateSamplesFromFile(char* filename, int waveform){
         fprintf(stderr, "%s:%d: ", __func__, __LINE__);
         perror("Błąd otworzenia kolejki B przez A");
     }
-
+    SharedMemBuf sharedMem(SHARED_MEMORY_AB_NAME);
     midiFile.read(filename);
     midiFile.joinTracks();
     midiFile.doTimeAnalysis();
@@ -84,11 +86,15 @@ void GenerateSamplesFromFile(char* filename, int waveform){
             for (int s = 0; s < SAMPLE_RATE*duration; ++s){
                 if(s%SAMPLE_COUNT == SAMPLE_COUNT - 1){
                     data->send_time = std::chrono::high_resolution_clock::now();
-                    int sendResult = mq_send(mq, (const char *) data, sizeof(DataChunk), 0);
-                    if(sendResult < 0){
-                        fprintf(stderr, "%s:%d: ", __func__, __LINE__);
-                        perror("Błąd producenta A");
-                    }
+		    if(SHARED_MEMORY){
+			sharedMem.push(*data);
+		    } else {
+			int sendResult = mq_send(mq, (const char *) data, sizeof(DataChunk), 0);
+                    	if(sendResult < 0){
+                            fprintf(stderr, "%s:%d: ", __func__, __LINE__);
+                            perror("Błąd producenta A");
+                    	}
+		    }
                     delete data;
                     data = new DataChunk;
                 }

@@ -7,6 +7,8 @@
 #include <mqueue.h>
 #include "ProcessC.hpp"
 #include "datachunk.h"
+#include "test_definitions.h"
+#include "SharedMemBuff.h"
 #include <iostream>
 #include <thread>
 #include <vector>
@@ -58,21 +60,20 @@ int main(int argc, char * argv[])	//argv[1] - nazwa pliku testowego, do którego
         fprintf(stderr, "%s:%d: ", __func__, __LINE__);
         perror("Błąd otworzenia kolejki C przez C");
     }
+    SharedMemBuf sharedMem(SHARED_MEMORY_BC_NAME);
 
     do {
         sf::SoundBuffer buffer;
-        int bytesRead = mq_receive(mq, (char *) &data, sizeof(DataChunk), NULL);
-        if(bytesRead > 0){
-	        std::chrono::duration<float , std::micro> elapsed = std::chrono::high_resolution_clock::now() - data.send_time;
-            long long transport_time = elapsed.count();
-            addLog(transport_time);
-            buffer.loadFromSamples(&data.samples[0], SAMPLE_COUNT, 1, SAMPLE_RATE);
-            player.addSamples(buffer);
-
-        } else {
-            fprintf(stderr, "%s:%d: ", __func__, __LINE__);
-            perror("Błąd konsumenta C");
-        }
+	if(SHARED_MEMORY){
+	    data = sharedMem.pop();
+	} else {
+	    mq_receive(mq, (char *) &data, sizeof(DataChunk), NULL);
+	}
+	std::chrono::duration<float , std::micro> elapsed = std::chrono::high_resolution_clock::now() - data.send_time;
+      	long long transport_time = elapsed.count();
+       	addLog(transport_time);
+      	buffer.loadFromSamples(&data.samples[0], SAMPLE_COUNT, 1, SAMPLE_RATE);
+       	player.addSamples(buffer);
 
     } while (1);
 

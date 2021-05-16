@@ -3,6 +3,8 @@
 #include <ctime>
 #include "datachunk.h"
 #include <mqueue.h>
+#include "SharedMemBuff.h"
+#include "test_definitions.h"
 using namespace std;
 
 int main()
@@ -31,6 +33,8 @@ int main()
         fprintf(stderr, "%s:%d: ", __func__, __LINE__);
         perror("Błąd utworzenia kolejki C");
     }
+    SharedMemBuf sharedMemory(SHARED_MEMORY_AB_NAME);
+    sharedMemory.clean();
     Menu menu;
     menu.mainMenu();
     mq_unlink(PROCESS_B_QUEUE_NAME);
