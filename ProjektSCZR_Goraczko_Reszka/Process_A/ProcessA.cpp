@@ -103,7 +103,7 @@ void GenerateSamplesFromFile(char* filename, int waveform){
      mq_close(mq);
 }
 
-int main(int argc, char * argv[])
+int main(int argc, char * argv[])	//argv[1] - nazwa pliku MIDI; argv[2] - numer fali (1 - sinusoidalna, 2 - prostokątna...)
 {
     char * music_file_name = argv[1];
     int wave_form = std::atoi(argv[2]);

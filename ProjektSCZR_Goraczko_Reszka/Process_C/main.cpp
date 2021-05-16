@@ -41,7 +41,7 @@ void saveLogs(char *file_name)
     }
 }
 
-int main(int argc, char * argv[])
+int main(int argc, char * argv[])	//argv[1] - nazwa pliku testowego, do którego zapisują się logi procesu C; argv[2] - co ile logóœ następuje ich zapis do pliku testowego
 {
     if (argc < 3) return -1;
     SAVING_PERIOD = std::stoi(argv[2]);

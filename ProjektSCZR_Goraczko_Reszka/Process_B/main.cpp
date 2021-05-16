@@ -2,7 +2,7 @@
 #include "Iir.h"
 #include "../datachunk.h"
 
-int main(int argc, char * argv[])
+int main(int argc, char * argv[])	//TO DO: argv[1] - częstotliwość odcinania
 {
     mqd_t mqB = mq_open(PROCESS_B_QUEUE_NAME, O_RDONLY);
     if(mqB < 0){
@@ -44,7 +44,7 @@ int main(int argc, char * argv[])
         }
 
     } while (1);
-    
+       
     mq_close(mqB);
     mq_close(mqC);
 }

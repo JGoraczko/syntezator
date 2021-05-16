@@ -5,7 +5,7 @@
 #include <mqueue.h>
 using namespace std;
 
-int main(int argc, char * argv[])
+int main(int argc, char * argv[])	//argv[1] - priorytet A; argv[2] - priorytet B; argv[3] - priorytet C; argv[4] - co ile logów następuje ich zapis do plików testowych
 {
     if (argc != 5) return -1;
 
