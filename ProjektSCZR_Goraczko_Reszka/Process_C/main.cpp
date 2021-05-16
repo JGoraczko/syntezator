@@ -30,7 +30,7 @@ void saveLogs(char *file_name)
         mutex_save.lock();
         mutex_logs.lock();
         std::fstream file;
-        file.open(file_name, std::ios::out);
+        file.open(file_name, std::ios::app);
         if (!file) exit(-1);
         for(int i=0; i<logs.size(); ++i)
             file << logs[i] << std::endl;
