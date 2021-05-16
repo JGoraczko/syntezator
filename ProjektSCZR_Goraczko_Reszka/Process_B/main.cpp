@@ -44,7 +44,7 @@ int main(int argc, char * argv[])
         }
 
     } while (1);
-
+    
     mq_close(mqB);
     mq_close(mqC);
 }

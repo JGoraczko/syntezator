@@ -108,6 +108,6 @@ int main(int argc, char * argv[])
     char * music_file_name = argv[1];
     int wave_form = std::atoi(argv[2]);
     GenerateSamplesFromFile(music_file_name, wave_form);
-
+    
     return 0;
 }

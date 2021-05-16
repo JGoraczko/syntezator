@@ -32,8 +32,7 @@ void MusicPlayer::addSamples(const sf::SoundBuffer& buffer)
 
 bool MusicPlayer::onGetData(Chunk& data)
 {
-    //std::lock_guard<std::mutex> guard(sem);
-    sem.lock();
+    std::lock_guard<std::mutex> guard(sem);
     if (samples.size() == 0 || currentSample == samples.size())
     {
         data.samples = &silence[0];
@@ -49,8 +48,7 @@ bool MusicPlayer::onGetData(Chunk& data)
     else
     {
         data.sampleCount = samples.size() - currentSample;
-        currentSample = samples.size();     
-    }    
-    sem.unlock();
+        currentSample = samples.size();            
+    }       
     return true;
 }
