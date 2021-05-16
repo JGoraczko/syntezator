@@ -1,18 +1,12 @@
 #include "menu.h"
 #include <iostream>
 #include <ctime>
-#include "../datachunk.h"
+#include "datachunk.h"
 #include <mqueue.h>
 using namespace std;
 
-int main(int argc, char * argv[])	//argv[1] - priorytet A; argv[2] - priorytet B; argv[3] - priorytet C; argv[4] - co ile logów następuje ich zapis do plików testowych
+int main()
 {
-    if (argc != 5) return -1;
-
-    char* arg[4];
-    for (int i=0; i<4; ++i)
-        arg[i]= argv[i+1];
-
     mq_unlink(PROCESS_B_QUEUE_NAME);
     mqd_t mqB;
     struct mq_attr attrB;
@@ -38,7 +32,7 @@ int main(int argc, char * argv[])	//argv[1] - priorytet A; argv[2] - priorytet B
         perror("Błąd utworzenia kolejki C");
     }
     Menu menu;
-    menu.mainMenu(arg);
+    menu.mainMenu();
     mq_unlink(PROCESS_B_QUEUE_NAME);
     mq_unlink(PROCESS_C_QUEUE_NAME);
     return 0;

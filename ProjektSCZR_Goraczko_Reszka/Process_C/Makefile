@@ -9,7 +9,7 @@ main.o: main.cpp ProcessC.hpp
 	$(CXX) $(CXXFLAGS) -c main.cpp ProcessC.hpp -I ../
 
 ProcessC.o: ProcessC.hpp ProcessC.cpp 
-	$(CXX) $(CXXFLAGS) -c ProcessC.hpp ProcessC.cpp
+	$(CXX) $(CXXFLAGS) -c ProcessC.hpp ProcessC.cpp -I ../
 
 .PHONY: clean
 clean:

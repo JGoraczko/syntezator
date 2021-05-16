@@ -7,6 +7,7 @@
 #include "MidiEvent.h"
 #include "MidiMessage.h"
 #include "datachunk.h"
+#include "test_definitions.h"
 #include <mqueue.h>
 #include <string.h>
 #include <ctime>

@@ -4,6 +4,7 @@
 #include <SFML/Audio.hpp>
 #include <vector>
 #include <mutex>
+#include "test_definitions.h"
 
 class MusicPlayer : public sf::SoundStream
 {
@@ -13,7 +14,6 @@ public:
 
 private:
 
-    const int SAMPLES_TO_STREAM = 30000;
     std::vector<sf::Int16> samples;
     std::vector<sf::Int16> silence{std::vector<sf::Int16>(SAMPLES_TO_STREAM, 0)};
     bool first_time = true;

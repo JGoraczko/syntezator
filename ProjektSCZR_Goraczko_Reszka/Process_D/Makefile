@@ -6,10 +6,10 @@ $(TARGET): main.o menu.o
 	$(CXX) main.o menu.o -o $(TARGET) -lrt
 
 main.o: main.cpp menu.h
-	$(CXX) $(CXXFLAGS) -c main.cpp menu.h
+	$(CXX) $(CXXFLAGS) -c main.cpp menu.h -I \..
 
 menu.o: menu.h menu.cpp 
-	$(CXX) $(CXXFLAGS) -c menu.h menu.cpp 
+	$(CXX) $(CXXFLAGS) -c menu.h menu.cpp -I \..
 
 .PHONY: clean
 clean:

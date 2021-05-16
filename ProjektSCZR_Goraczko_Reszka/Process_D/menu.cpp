@@ -43,11 +43,9 @@ void Menu::getOption (int &choice, int options, bool &error)    //gets correct n
     error = true;
 }
 
-void Menu::mainMenu(char *arg[])   //launches main menu
+void Menu::mainMenu()   //launches main menu
 {
-  for (int i=0; i<4; ++i)
-    parameters[i]= arg[i];
-  setpriority(PRIO_PROCESS, 0, atoi(parameters[D_PRIORITY]));
+  setpriority(PRIO_PROCESS, 0, D_PRIORITY);
   int choice;
   bool error = false;
   do
@@ -143,14 +141,14 @@ void Menu::playMidiFile()
     pid_t pid0 = fork();
     if( pid0 == 0){
         char *argv[] = {(char *) "./processA", f_name, wave_numb, NULL};
-        setpriority(PRIO_PROCESS, 0, atoi(parameters[A_PRIORITY]));
+        setpriority(PRIO_PROCESS, 0, A_PRIORITY);
         execve("./processA", argv, NULL);
     } else pid_tab[0] = pid0;
 
     pid_t pid1 = fork();
     if( pid1 == 0){
         char *argv1[] = {(char *) "./processB", NULL};
-        //setpriority(PRIO_PROCESS, 0, atoi(parameters[A_PRIORITY]));
+        setpriority(PRIO_PROCESS, 0, B_PRIORITY);
         execve("./processB", argv1, NULL);
     } else pid_tab[1] = pid1;
     
@@ -162,8 +160,8 @@ void Menu::playMidiFile()
     char *test_f_name = (char *) test_file_name.c_str();
     pid_t pid2 = fork();
     if( pid2 == 0){
-        char *argv2[] = {(char *) "./processC", test_f_name, parameters[SAVING_PERIOD], NULL};
-        setpriority(PRIO_PROCESS, 0, atoi(parameters[C_PRIORITY]));
+        char *argv2[] = {(char *) "./processC", test_f_name, NULL};
+        setpriority(PRIO_PROCESS, 0, C_PRIORITY);
         execve("./processC", argv2, NULL);
     } else pid_tab[2] = pid2;
 
