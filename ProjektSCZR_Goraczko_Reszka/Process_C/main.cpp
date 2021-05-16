@@ -63,12 +63,12 @@ int main(int argc, char * argv[])	//argv[1] - nazwa pliku testowego, do którego
         sf::SoundBuffer buffer;
         int bytesRead = mq_receive(mq, (char *) &data, sizeof(DataChunk), NULL);
         if(bytesRead > 0){
-	    //std::cout << "Proces C otrzymał" << bytesRead << "\n";
-            buffer.loadFromSamples(&data.samples[0], SAMPLE_COUNT, 1, SAMPLE_RATE);
-            player.addSamples(buffer);
-            std::chrono::duration<float , std::micro> elapsed = std::chrono::high_resolution_clock::now() - data.send_time;
+	        std::chrono::duration<float , std::micro> elapsed = std::chrono::high_resolution_clock::now() - data.send_time;
             long long transport_time = elapsed.count();
             addLog(transport_time);
+            buffer.loadFromSamples(&data.samples[0], SAMPLE_COUNT, 1, SAMPLE_RATE);
+            player.addSamples(buffer);
+
         } else {
             fprintf(stderr, "%s:%d: ", __func__, __LINE__);
             perror("Błąd konsumenta C");
