@@ -14,11 +14,14 @@ class Menu
    private:
 
      int wave_form = 1;
+     bool isFilterOn = false;
+     int filterFrequency = 1000;
      void pressKeyToContinue (void);
      int getInfo (bool &error);
      void getInt (int &choice, bool &error);
      void getOption (int &choice, int options, bool &error);
      void waveformMenu (void);
+     void filterMenu (void);
      void playMidiFile(void);
 };
 

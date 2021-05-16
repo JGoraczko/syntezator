@@ -46,11 +46,12 @@ void Menu::getOption (int &choice, int options, bool &error)    //gets correct n
 void Menu::mainMenu()   //launches main menu
 {
   setpriority(PRIO_PROCESS, 0, D_PRIORITY);
+  system("clear");
   int choice;
   bool error = false;
   do
   {
-    cout << "*****MIDI SYNTHESIZER*****\nChoose one of the options:\n1 - Choose waveform\n2 - Play from MIDI file\n3 - Exit\nYour choice:\n";
+    cout << "*****MIDI SYNTHESIZER*****\nChoose one of the options:\n1 - Choose waveform\n2 - Show filter settings\n3 - Play from MIDI file\n4 - Exit\nYour choice:\n";
     if (error)
       cout << NO_SUCH_OPTION << endl;
     getOption(choice, 3, error);
@@ -62,8 +63,15 @@ void Menu::mainMenu()   //launches main menu
           waveformMenu();
           break;
        }
-
+       
        case 2:
+       {
+          system("clear");
+          filterMenu();
+         break;
+       }
+
+       case 3:
        {
           system("clear");
           playMidiFile();
@@ -72,7 +80,59 @@ void Menu::mainMenu()   //launches main menu
     }
     system("clear");
   }
-  while (choice != 3);
+  while (choice != 4);
+}
+
+void Menu::filterMenu ()
+{
+  	int choice;
+  	bool error = false;
+  	do
+  	{
+    	cout << "*****MIDI SYNTHESIZER*****\n";
+    	if (isFilterOn) 
+    		cout << "Filtring is on - cut off frequency = " << filterFrequency << endl;
+    	else
+    		cout << "Filtring is off" << endl;
+    	cout << "Choose one of the options:\n1 - Set different frequency\n2 - Turn on filtering\n3 - Turn off filtering\n4 - Return to main menu\nYour choice:\n";
+    	if (error)
+      		cout << NO_SUCH_OPTION << endl;
+    	getOption(choice, 3, error);
+    	switch (choice)
+    	{
+    	   case 1:
+    	   {
+    	      system("clear");
+    	      cout << "Enter new frequency: ";
+    	      string buf;
+    	      cin >> buf;
+    	      filterFrequency = atoi(buf.c_str());
+    	      cout << "Set frequency value to " << filterFrequency << endl;
+    	      pressKeyToContinue();
+    	      break;
+    	   }
+            
+            case 2:
+    	   {
+    	      system("clear");
+    	      cout << "Filter is turned on. Filter frequency = " << filterFrequency << endl;
+    	      isFilterOn = true;
+    	      pressKeyToContinue();
+    	      break;
+    	   }       
+
+           case 3:
+    	   {
+    	      system("clear");
+    	      isFilterOn = false;
+    	      cout << "Filter is turned off\n";
+    	      pressKeyToContinue();
+    	      break;
+    	   }
+          
+    	}
+    	system("clear");
+  	} while (choice != 4);
 }
 
 void Menu::waveformMenu()
@@ -135,11 +195,22 @@ void Menu::playMidiFile()
     pid_t pid_tab[3];
     cout << "Enter name of MIDI file:\n";
     cin >> file_name;
-    
-    //creating A process
     char *f_name = (char *) file_name.c_str();
     string s_numb = to_string(wave_form);
     char *wave_numb = (char *) s_numb.c_str();
+    string testB_file_name = "testB", testC_file_name = "testC";
+    time_t current_time = time(NULL);
+    testB_file_name += std::asctime(std::localtime(&current_time));
+    testB_file_name.pop_back();
+    testB_file_name += ".txt";
+    testC_file_name += std::asctime(std::localtime(&current_time));
+    testC_file_name.pop_back();
+    testC_file_name += ".txt";
+    string filterStatus = to_string(isFilterOn), filterFreq = to_string(filterFrequency);
+    char *testB_f_name = (char *) testB_file_name.c_str();
+    char *testC_f_name = (char *) testC_file_name.c_str();
+        
+    //creating A process
     pid_t pid0 = fork();
     if( pid0 == 0){
         char *argv[] = {(char *) "./processA", f_name, wave_numb, NULL};
@@ -148,25 +219,14 @@ void Menu::playMidiFile()
     } else pid_tab[0] = pid0;
 
 	//creating B process
-	string testB_file_name = "testB";
-    time_t current_time = time(NULL);
-    testB_file_name += std::asctime(std::localtime(&current_time));
-    testB_file_name.pop_back();
-    testB_file_name += ".txt";
-    char *testB_f_name = (char *) testB_file_name.c_str();
     pid_t pid1 = fork();
     if( pid1 == 0){
-        char *argv1[] = {(char *) "./processB", (char*) "1", (char*) "10000", testB_f_name, NULL};
+        char *argv1[] = {(char *) "./processB", (char*) filterStatus.c_str(), (char*) filterFreq.c_str(), testB_f_name, NULL};
         setpriority(PRIO_PROCESS, 0, B_PRIORITY);
         execve("./processB", argv1, NULL);
     } else pid_tab[1] = pid1;
     
     //creating C process
-    string testC_file_name = "testC";
-    testC_file_name += std::asctime(std::localtime(&current_time));
-    testC_file_name.pop_back();
-    testC_file_name += ".txt";
-    char *testC_f_name = (char *) testC_file_name.c_str();
     pid_t pid2 = fork();
     if( pid2 == 0){
         char *argv2[] = {(char *) "./processC", testC_f_name, NULL};

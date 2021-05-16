@@ -36,7 +36,11 @@ int main(int argc, char * argv[])	//TO DO: argv[1] - włączenie/wyłączenie fi
 {
 	if (argc < 4) return -1;
 	bool ifFiltrSamples = std::atoi(argv[1]);
-	const float cutoff_frequency = std::atoi(argv[2]);
+	float cutoff_frequency;
+	if (ifFiltrSamples)
+		cutoff_frequency = std::atoi(argv[2]);
+	else
+		cutoff_frequency = 0;
 	char * file_name = argv[3];
 	mutex_save.lock();
     std::thread logSaver (saveLogs, file_name);
