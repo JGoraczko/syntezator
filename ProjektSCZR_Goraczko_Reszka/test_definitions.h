@@ -5,6 +5,7 @@
 #define B_PRIORITY 0
 #define C_PRIORITY 0
 #define D_PRIORITY 0
+#define SHARED_MEM_BUFF_SIZE 20
 #define SAVING_PERIOD 50		//wielkość "paczki" logów zapisywanych do pliku - ta wielkość pośrednio określa okres zapisu logów do plików testowych
 #define SAMPLE_COUNT 1000		//ilość próbek przesyłanych w pojedynczym komunikacie
 

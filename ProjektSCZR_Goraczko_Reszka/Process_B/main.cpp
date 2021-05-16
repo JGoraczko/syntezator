@@ -18,7 +18,7 @@ int main(int argc, char * argv[])	//TO DO: argv[1] - częstotliwość odcinania
     const int order = 4; 
     Iir::Butterworth::LowPass<order> filter;
     const float samplingrate = 44100;
-    const float cutoff_frequency = 10000;
+    const float cutoff_frequency = 1500;
     filter.setup (samplingrate, cutoff_frequency);
 
     do {
