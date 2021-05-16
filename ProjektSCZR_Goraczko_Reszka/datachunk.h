@@ -5,8 +5,7 @@
 #include <SFML/Audio.hpp>
 #include <ctime>
 #include <chrono>
-#define PROCESS_B_QUEUE_NAME "/process_b_queue"
-#define PROCESS_C_QUEUE_NAME "/process_c_queue"
+
 
 typedef struct DataChunk
 {
