@@ -99,6 +99,7 @@ void GenerateSamplesFromFile(char* filename, int waveform){
                     data = new DataChunk;
                 }
                 data->samples[s%SAMPLE_COUNT] = waveFunction(s, 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0)), SAMPLE_RATE);
+		
             }
             data->send_time = std::chrono::high_resolution_clock::now();
             mq_send(mq, (const char *) data, sizeof(DataChunk), 0);
@@ -114,7 +115,8 @@ int main(int argc, char * argv[])	//argv[1] - nazwa pliku MIDI; argv[2] - numer 
 	if (argc < 3) return -1;
     char * music_file_name = argv[1];
     int wave_form = std::atoi(argv[2]);
-    GenerateSamplesFromFile(music_file_name, wave_form);
+    //GenerateSamplesFromFile(music_file_name, wave_form);
+    GenerateSamplesFromFile("Beethoven.mid", 4);
     
     return 0;
 }
