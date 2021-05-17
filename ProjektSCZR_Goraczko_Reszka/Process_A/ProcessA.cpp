@@ -77,11 +77,6 @@ void GenerateSamplesFromFile(char* filename, int waveform){
     for(int i = 0; i < midiFile[0].size(); i++ ){
         if(midiFile[0][i].isNoteOn()){
             double duration = midiFile[0][i].getDurationInSeconds();
-
-            /*std::cout << duration << " ---------- ";
-            std::cout << midiFile[0][i].getKeyNumber() << " ---------- ";
-            std::cout << 27.5 * pow(2, (midiFile[0][i].getKeyNumber()/12.0));*/
-
             DataChunk *data = new DataChunk;
             for (int s = 0; s < SAMPLE_RATE*duration; ++s){
                 if(s%SAMPLE_COUNT == SAMPLE_COUNT - 1){
@@ -115,8 +110,7 @@ int main(int argc, char * argv[])	//argv[1] - nazwa pliku MIDI; argv[2] - numer 
 	if (argc < 3) return -1;
     char * music_file_name = argv[1];
     int wave_form = std::atoi(argv[2]);
-    //GenerateSamplesFromFile(music_file_name, wave_form);
-    GenerateSamplesFromFile("Beethoven.mid", 4);
+    GenerateSamplesFromFile(music_file_name, wave_form);
     
     return 0;
 }

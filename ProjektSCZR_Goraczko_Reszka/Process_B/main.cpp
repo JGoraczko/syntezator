@@ -63,8 +63,7 @@ int main(int argc, char * argv[])	//TO DO: argv[1] - włączenie/wyłączenie fi
     const int order = 4; 
     Iir::Butterworth::LowPass<order> filter;
     const float samplingrate = 44100;
-    //filter.setup (samplingrate, cutoff_frequency);
-    filter.setup (samplingrate, 1000);
+    filter.setup (samplingrate, cutoff_frequency);
     std::chrono::high_resolution_clock::time_point receive_time, send_time;
 
     do {
@@ -74,11 +73,10 @@ int main(int argc, char * argv[])	//TO DO: argv[1] - włączenie/wyłączenie fi
 	} else {
 	    mq_receive(mqB, (char *) &data, sizeof(DataChunk), NULL);
 	}
-        //int bytesRead = mq_receive(mqB, (char *) &data, sizeof(DataChunk), NULL);
         receive_time = std::chrono::high_resolution_clock::now();
         send_time = data.send_time;
 	DataChunk dataFiltered = data;
-	if (1){//ifFiltrSamples){
+	if (ifFiltrSamples){
 	    for(int i = 0; i < SAMPLE_COUNT; ++i){
 	        dataFiltered.samples[i] = filter.filter(data.samples[i]);
 	    }

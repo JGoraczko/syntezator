@@ -12,8 +12,8 @@
 #define SHARED_MEMORY_BC_NAME "/shared_memory_bc"
 
 #define SHARED_MEM_BUFF_SIZE 5
-#define SAVING_PERIOD 300		//wielkość "paczki" logów zapisywanych do pliku - ta wielkość pośrednio określa okres zapisu logów do plików testowych
-#define SAMPLE_COUNT 1000		//ilość próbek przesyłanych w pojedynczym komunikacie
+#define SAVING_PERIOD 50		//wielkość "paczki" logów zapisywanych do pliku - ta wielkość pośrednio określa okres zapisu logów do plików testowych
+#define SAMPLE_COUNT 2000		//ilość próbek przesyłanych w pojedynczym komunikacie
 
 #define MESSAQE_QUEUES 0
 #define SHARED_MEMORY 1
